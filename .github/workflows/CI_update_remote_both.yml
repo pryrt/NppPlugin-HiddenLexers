@@ -1,30 +1,26 @@
-name: CI_update_remote
+name: CI_update_remote_both
 
 on:
   # on demand, from Actions tab
   workflow_dispatch:
 
-  ### on schedule (using cron syntax)
-  ##schedule:
-  ##  - cron: "0 0 * * *" #< every day at 00:00 UTC
+  # on schedule (using cron syntax)
+  schedule:
+    - cron: "0 0 1 * *" #< on the first day of every month, at 00:00 UTC
 
 jobs:
   update:
-    # This job would annoy people who fork the template, or if plugintemplate ever becomes a "template repository"
-    #   if someone _wants_ this, change the name to match their own fork or project
-    if: ${{ github.repository == 'npp-plugins/plugintemplate' }}
-
     permissions:
       contents: write
 
     runs-on: windows-latest
 
     steps:
-    - name: Checkout plugintemplate repo
-      uses: actions/checkout@v7
+    - name: Checkout plugin repo
+      uses: actions/checkout@v4
 
     - name: Checkout N++ repo
-      uses: actions/checkout@v7
+      uses: actions/checkout@v4
       with:
         repository: notepad-plus-plus/notepad-plus-plus
         path: npp_repo
@@ -55,7 +51,7 @@ jobs:
             ##
             ### The following might be useful to plugin developers, but may require changes to make them compatible
             ###     as such, they are listed for reference, but not included as part of the automatic update
-            ###     of the template
+            ###     of the plugin
             ##
             #"src\\DockingFeature\\DockingDlgInterface.h" = "npp_repo\\PowerEditor\\src\\WinControls\\DockingWnd\\DockingDlgInterface.h"
             #"src\\DockingFeature\\StaticDialog.h" = "npp_repo\\PowerEditor\\src\\WinControls\\StaticDialog\\StaticDialog.h"
@@ -96,15 +92,9 @@ jobs:
         #
         git status
 
-    - name: Commit any updates to the repo
-      uses: stefanzweifel/git-auto-commit-action@v7
-      with:
-        # GitHub will auto-link the upstream ref to the corresponding commit
-        commit_message: Sync template with notepad-plus-plus/notepad-plus-plus@${{ steps.diff_step.outputs.HEAD_REF }}
-
     - name: If ANY_DIFFERENCE then add MSBuild to PATH
       if: ${{steps.diff_step.outputs.ANY_DIFFERENCE}}
-      uses: microsoft/setup-msbuild@v3
+      uses: microsoft/setup-msbuild@v2
 
     - name: If ANY_DIFFERENCE then run MSBuild of plugin dll
       if: ${{steps.diff_step.outputs.ANY_DIFFERENCE}}
@@ -115,11 +105,18 @@ jobs:
             msbuild NppPluginTemplate.vcxproj /m /p:configuration=Release /p:platform="$target"
         }
 
-    - name: Release
-      if: ${{steps.diff_step.outputs.ANY_DIFFERENCE}}
-      uses: softprops/action-gh-release@v3
+    - name: Commit any updates to the repo
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        name: Plugin Template for Notepad++ release v${{ steps.diff_step.outputs.CHANGE_DATE }}.${{github.run_number}}.${{github.run_attempt}}
-        tag_name: v${{ steps.diff_step.outputs.CHANGE_DATE }}.${{github.run_number}}.${{github.run_attempt}}
-        target_commitish: ${{ github.ref_name }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        # GitHub will auto-link the upstream ref to the corresponding commit
+        commit_message: Sync plugin with notepad-plus-plus/notepad-plus-plus@${{ steps.diff_step.outputs.HEAD_REF }}
+
+    # un-comment the Release section if you want to trigger a release of your plugin based solely on the updates from Notepad++ repo
+    #- name: Release
+    #  if: ${{steps.diff_step.outputs.ANY_DIFFERENCE}}
+    #  uses: softprops/action-gh-release@v2
+    #  with:
+    #    name: Plugin Template for Notepad++ release v${{ steps.diff_step.outputs.CHANGE_DATE }}.${{github.run_number}}.${{github.run_attempt}}
+    #    tag_name: v${{ steps.diff_step.outputs.CHANGE_DATE }}.${{github.run_number}}.${{github.run_attempt}}
+    #    target_commitish: ${{ github.ref_name }}
+    #    token: ${{ secrets.GITHUB_TOKEN }}
