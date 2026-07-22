@@ -75,6 +75,12 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 			commandMenuCleanUp();
 		}
 		break;
+		case NPPN_LANGCHANGED:
+		case NPPN_BUFFERACTIVATED:
+		{
+			check_lexers(&notifyCode->nmhdr);
+			break;
+		}
 
 		default:
 			return;

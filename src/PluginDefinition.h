@@ -73,4 +73,7 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 void hello();
 void helloDlg();
 
+// Plugin internal commands
+void check_lexers(Sci_NotifyHeader* notifyHeader);	// checks if current document is of interest
+
 #endif //PLUGINDEFINITION_H

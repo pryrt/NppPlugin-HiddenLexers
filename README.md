@@ -33,10 +33,25 @@ For now, there's not much to note.
 
 ---------------------------------
 
-## Temp Notes
+## Development Notes
 
-```
-git mv vs.proj\NppPluginTemplate.vcxproj vs.proj\HiddenLexers.vcxproj
-git mv src\NppPluginDemo.cpp src\HiddenLexers.cpp
-git mv src\NppPluginDemo.rc src\HiddenLexers.rc
-```
+Adapt my PythonScript <C:\Users\pryrt\AppData\Roaming\Notepad++\plugins\Config\PythonScript\scripts\dev\HiddenLexers.py> into a plugin.
+- [ ] JSON or INI config file to handle the map_extensions functionality (mapping extension to one of the named lexers)
+- [ ] Some sort of table which lists the available
+- [ ] JSON or INI or stylerThemes-like-XML for setting colors
+- [ ] JSON or INI or langs-like-XML for setting keywords
+- [ ] Notification Handling: psuedocode:
+    ```pseudocode
+    IF(NPPN_LANGCHANGED or NPPN_BUFFERACTIVATED):       # see NppPluginDemo.cpp:beNotified() switch
+        # check_lexers
+        read active lexer and file_extension
+        if !activeLexer and file_extension in map_extensions and self.enabled:
+            # init_lexer(file_extension)
+            call colorize(file_extension)
+                set style colors
+                ilexer_ptr = SendMessage(nppHwnd, NPPM_CREATELEXER, 0, wcharptrLexername)
+                SendMessage(editorHwnd, SCI_SETLEXER, 0, ilexer_ptr)
+                setProperty as needed
+                setKeywords for each list, as needed
+            update internal lexer name variable (don't know if that's useful outside of PythonScript implementation)
+    ```
