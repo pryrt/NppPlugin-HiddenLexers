@@ -46,8 +46,8 @@ jobs:
             "src\\Notepad_plus_msgs.h" = "npp_repo\\PowerEditor\\src\\MISC\\PluginsManager\\Notepad_plus_msgs.h"
             "src\\PluginInterface.h" = "npp_repo\\PowerEditor\\src\\MISC\\PluginsManager\\PluginInterface.h"
             "src\\menuCmdID.h" = "npp_repo\\PowerEditor\\src\\menuCmdID.h"
-            "src\\DockingFeature\\Docking.h" = "npp_repo\\PowerEditor\\src\\WinControls\\DockingWnd\\Docking.h"
-            "src\\DockingFeature\\dockingResource.h" = "npp_repo\\PowerEditor\\src\\WinControls\\DockingWnd\\dockingResource.h"
+            #"src\\DockingFeature\\Docking.h" = "npp_repo\\PowerEditor\\src\\WinControls\\DockingWnd\\Docking.h"
+            #"src\\DockingFeature\\dockingResource.h" = "npp_repo\\PowerEditor\\src\\WinControls\\DockingWnd\\dockingResource.h"
             ##
             ### The following might be useful to plugin developers, but may require changes to make them compatible
             ###     as such, they are listed for reference, but not included as part of the automatic update
@@ -102,7 +102,7 @@ jobs:
       run: |
         foreach ($target in ('Win32', 'x64', 'ARM64'))
         {
-            msbuild NppPluginTemplate.vcxproj /m /p:configuration=Release /p:platform="$target"
+            msbuild HiddenLexers.vcxproj /m /p:configuration=Release /p:platform="$target"
         }
 
     - name: Commit any updates to the repo

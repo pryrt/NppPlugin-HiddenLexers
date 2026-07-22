@@ -30,3 +30,13 @@ TODO: Not sure whether this will stay with the JSON, or be a separate stylers.xm
 ## Notes
 
 For now, there's not much to note.
+
+---------------------------------
+
+## Temp Notes
+
+```
+git mv vs.proj\NppPluginTemplate.vcxproj vs.proj\HiddenLexers.vcxproj
+git mv src\NppPluginDemo.cpp src\HiddenLexers.cpp
+git mv src\NppPluginDemo.rc src\HiddenLexers.rc
+```
