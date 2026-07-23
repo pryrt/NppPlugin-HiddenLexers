@@ -17,6 +17,9 @@
 
 #include "PluginDefinition.h"
 #include "menuCmdID.h"
+#include "NppMetaClass.h"
+#include "Version.h"
+#include <pathcch.h>
 
 //
 // The plugin data that Notepad++ needs
@@ -27,6 +30,11 @@ FuncItem funcItem[nbFunc];
 // The data of Notepad++ that you can use in your plugin commands
 //
 NppData nppData;
+
+//
+// Instantiate global NppMetaInfo object, passing in name of plugin
+//
+NppMetaInfo gNppMetaInfo(VERSION_NAME_WS);
 
 //
 // Initialize your plugin data here
@@ -40,6 +48,14 @@ void pluginInit(HANDLE /*hModule*/)
 //
 void pluginCleanUp()
 {
+}
+
+//
+// Initialization of metadata useful to the program
+//      must come _after_ nppData global is initialized in setInfo
+void metaInfoInit()
+{
+    gNppMetaInfo.populate();
 }
 
 //
@@ -147,6 +163,7 @@ void check_lexers(Sci_NotifyHeader* notifyHeader)
     if (!szfn)
         return;
 
+
     // get file ext
     // N++ API BUG: returns "." rather than "md" or "py" or similar.
     //// std::string sFileExt(MAX_PATH + 1, '\0');
@@ -157,6 +174,21 @@ void check_lexers(Sci_NotifyHeader* notifyHeader)
     //// }
     //// if (!szex)
     ////     return;
+    PCWSTR extensionPtr = nullptr;
+    HRESULT hr = PathCchFindExtension(wsFileName.data(), wsFileName.length(), &extensionPtr);
+    if (hr != S_OK)
+        return;
+    std::wstring wsFileExt = extensionPtr;
 
+    // make a debug string
+    pcjHelper::delNull(wsFileName);
+    pcjHelper::delNull(wsFileExt);
+    std::wstring wsMsg = wsFileName;
+    if (!wsFileExt.empty()) {
+        if(wsFileExt.data()[0]==L'.')
+            wsFileExt.erase(0, 1);      // remove
+        wsMsg += std::wstring(L" => ") + wsFileExt;
+    }
+    ::MessageBox(nppData._nppHandle, wsMsg.data(), L"HiddenLexer check_lexers", MB_OK);
 }
 

@@ -52,6 +52,10 @@ void pluginInit(HANDLE hModule);
 void pluginCleanUp();
 
 //
+// Initialization of metadata useful to the program
+void metaInfoInit();
+
+//
 //Initialization of your plugin commands
 //
 void commandMenuInit();
@@ -75,5 +79,12 @@ void helloDlg();
 
 // Plugin internal commands
 void check_lexers(Sci_NotifyHeader* notifyHeader);	// checks if current document is of interest
+
+//
+// Need to expose the globals from PluginDefinition.cpp:
+//
+extern NppData nppData;
+//extern NppMetaInfo gNppMetaInfo;
+extern FuncItem funcItem[nbFunc];
 
 #endif //PLUGINDEFINITION_H
