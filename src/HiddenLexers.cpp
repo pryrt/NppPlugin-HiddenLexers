@@ -79,7 +79,7 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 		case NPPN_LANGCHANGED:
 		case NPPN_BUFFERACTIVATED:
 		{
-			check_lexers(&notifyCode->nmhdr);
+			gHiddenLexerInterface.check_lexers(&notifyCode->nmhdr);
 			break;
 		}
 

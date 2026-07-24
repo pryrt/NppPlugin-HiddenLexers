@@ -18,6 +18,7 @@
 #include "PluginDefinition.h"
 #include "menuCmdID.h"
 #include "NppMetaClass.h"
+#include "HiddenLexerInterface.h"
 #include "Version.h"
 #include <pathcch.h>
 
@@ -35,6 +36,9 @@ NppData nppData;
 // Instantiate global NppMetaInfo object, passing in name of plugin
 //
 NppMetaInfo gNppMetaInfo(VERSION_NAME_WS);
+
+// Instantiate global HiddenLexerInterface
+HiddenLexerInterface gHiddenLexerInterface;
 
 //
 // Initialize your plugin data here
@@ -130,65 +134,3 @@ void helloDlg()
 {
     ::MessageBox(NULL, TEXT("Hello, Notepad++!"), TEXT("HiddenLexer helloDlg()"), MB_OK);
 }
-
-#include <string>
-// checks if current document is of interest
-void check_lexers(Sci_NotifyHeader* notifyHeader)
-{
-    // Get the current scintilla
-    int which = -1;
-    ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
-    if (which == -1)
-        return;
-    HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
-
-    // Get Lexer Name
-    size_t sz = static_cast<size_t>(::SendMessage(curScintilla, SCI_GETLEXERLANGUAGE, 0, static_cast<LPARAM>(NULL)));
-    std::string sOldLexer(sz+1, '\0');
-    sz = ::SendMessage(curScintilla, SCI_GETLEXERLANGUAGE, 0, reinterpret_cast<LPARAM>(sOldLexer.data()));
-    //bool has_no_lexer_assigned = sOldLexer == "null";
-
-    // Debug Lexer Name and use notifyHeader
-    char cMsg[100] = "";
-    sprintf_s(cMsg, "NPPN(hwndFrom:%08p, idFrom:%u, code:%u) => %s", notifyHeader->hwndFrom, (unsigned)notifyHeader->idFrom, notifyHeader->code, sOldLexer.data());
-    //::MessageBoxA(NULL, cMsg, "HiddenLexer check_lexers", MB_OK);
-
-    // get file name
-    std::wstring wsFileName(MAX_PATH + 1, '\0');
-    size_t szfn = static_cast<size_t>(::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, static_cast<WPARAM>(MAX_PATH), reinterpret_cast<LPARAM>(wsFileName.data())));
-    if (!szfn) {
-        wsFileName.resize(2 * MAX_PATH + 1);
-        szfn = static_cast<size_t>(::SendMessage(nppData._nppHandle, NPPM_GETFILENAME, static_cast<WPARAM>(MAX_PATH), reinterpret_cast<LPARAM>(wsFileName.data())));
-    }
-    if (!szfn)
-        return;
-
-
-    // get file ext
-    // N++ API BUG: returns "." rather than "md" or "py" or similar.
-    //// std::string sFileExt(MAX_PATH + 1, '\0');
-    //// size_t szex = static_cast<size_t>(::SendMessage(nppData._nppHandle, NPPM_GETEXTPART, static_cast<WPARAM>(MAX_PATH), reinterpret_cast<LPARAM>(sFileExt.data())));
-    //// if (!szex) {
-    ////     wsFileName.resize(2 * MAX_PATH + 1);
-    ////     szex = static_cast<size_t>(::SendMessage(nppData._nppHandle, NPPM_GETEXTPART, static_cast<WPARAM>(MAX_PATH), reinterpret_cast<LPARAM>(sFileExt.data())));
-    //// }
-    //// if (!szex)
-    ////     return;
-    PCWSTR extensionPtr = nullptr;
-    HRESULT hr = PathCchFindExtension(wsFileName.data(), wsFileName.length(), &extensionPtr);
-    if (hr != S_OK)
-        return;
-    std::wstring wsFileExt = extensionPtr;
-
-    // make a debug string
-    pcjHelper::delNull(wsFileName);
-    pcjHelper::delNull(wsFileExt);
-    std::wstring wsMsg = wsFileName;
-    if (!wsFileExt.empty()) {
-        if(wsFileExt.data()[0]==L'.')
-            wsFileExt.erase(0, 1);      // remove
-        wsMsg += std::wstring(L" => ") + wsFileExt;
-    }
-    ::MessageBox(nppData._nppHandle, wsMsg.data(), L"HiddenLexer check_lexers", MB_OK);
-}
-

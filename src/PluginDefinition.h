@@ -22,6 +22,7 @@
 // All difinitions of plugin interface
 //
 #include "PluginInterface.h"
+#include "HiddenLexerInterface.h"
 
 //-------------------------------------//
 //-- STEP 1. DEFINE YOUR PLUGIN NAME --//
@@ -78,7 +79,6 @@ void hello();
 void helloDlg();
 
 // Plugin internal commands
-void check_lexers(Sci_NotifyHeader* notifyHeader);	// checks if current document is of interest
 
 //
 // Need to expose the globals from PluginDefinition.cpp:
