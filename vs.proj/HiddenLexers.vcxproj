@@ -27,6 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\Classes\ConfigFromJson.h" />
     <ClInclude Include="..\src\Classes\HiddenLexerInterface.h" />
     <ClInclude Include="..\src\Classes\json.hpp" />
     <ClInclude Include="..\src\Classes\NppMetaClass.h" />
@@ -41,6 +42,7 @@
     <ClInclude Include="..\src\Sci_Position.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Classes\ConfigFromJson.cpp" />
     <ClCompile Include="..\src\Classes\HiddenLexerInterface.cpp" />
     <ClCompile Include="..\src\Classes\NppMetaClass.cpp" />
     <ClCompile Include="..\src\HiddenLexers.cpp" />

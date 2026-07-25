@@ -13,6 +13,8 @@ public:
 	// (internally tracks whether it's been populated already, and doesn't duplicate effort)
 	void populate(void);
 
+	std::wstring wsPluginName(void) { return _wsPluginName; }
+
 	NppData& hwnd;
 
 	struct {

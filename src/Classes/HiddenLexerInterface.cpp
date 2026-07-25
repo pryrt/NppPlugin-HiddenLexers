@@ -1,6 +1,4 @@
 #include "HiddenLexerInterface.h"
-// nlohmann/json.hpp
-#include "json.hpp"
 
 HiddenLexerInterface::HiddenLexerInterface(void)
 {
@@ -8,6 +6,7 @@ HiddenLexerInterface::HiddenLexerInterface(void)
     // TODO: read config file (if it exists) and populate intitial data structures
     // For now, hardcode an example
     _mapExt2Lexer.emplace(L"stata", L"stata");
+    _curScintillaHwnd = nullptr;
 }
 
 void HiddenLexerInterface::check_lexers(Sci_NotifyHeader* notifyHeader)
@@ -132,3 +131,8 @@ void HiddenLexerInterface::set_options(std::wstring /*wsLexerName*/)
 }
 
 
+// read plugin config file
+bool read_config(void)
+{
+    return false;
+}

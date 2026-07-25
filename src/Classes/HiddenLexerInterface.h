@@ -30,6 +30,9 @@ public:
 	// set options for the appropriate lexer
 	void set_options(std::wstring wsLexerName);
 
+	// read plugin config file
+	bool read_config(void);
+
 private:
 	HWND _curScintillaHwnd;
 	std::map<std::wstring, std::wstring> _mapExt2Lexer;
