@@ -4,8 +4,10 @@
 
 HiddenLexerInterface::HiddenLexerInterface(void)
 {
-	gNppMetaInfo.populate();
-	// TODO: read config file (if it exists) and populate intitial data structures
+    gNppMetaInfo.populate();
+    // TODO: read config file (if it exists) and populate intitial data structures
+    // For now, hardcode an example
+    _mapExt2Lexer.emplace(L"stata", L"stata");
 }
 
 void HiddenLexerInterface::check_lexers(Sci_NotifyHeader* notifyHeader)
@@ -15,12 +17,12 @@ void HiddenLexerInterface::check_lexers(Sci_NotifyHeader* notifyHeader)
     ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
     if (which == -1)
         return;
-    HWND curScintilla = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
+    _curScintillaHwnd = (which == 0) ? nppData._scintillaMainHandle : nppData._scintillaSecondHandle;
 
     // Get Lexer Name
-    size_t sz = static_cast<size_t>(::SendMessage(curScintilla, SCI_GETLEXERLANGUAGE, 0, static_cast<LPARAM>(NULL)));
+    size_t sz = static_cast<size_t>(::SendMessage(_curScintillaHwnd, SCI_GETLEXERLANGUAGE, 0, static_cast<LPARAM>(NULL)));
     std::string sOldLexer(sz + 1, '\0');
-    sz = ::SendMessage(curScintilla, SCI_GETLEXERLANGUAGE, 0, reinterpret_cast<LPARAM>(sOldLexer.data()));
+    sz = ::SendMessage(_curScintillaHwnd, SCI_GETLEXERLANGUAGE, 0, reinterpret_cast<LPARAM>(sOldLexer.data()));
     //bool has_no_lexer_assigned = sOldLexer == "null";
 
     // Debug Lexer Name and use notifyHeader
@@ -47,14 +49,86 @@ void HiddenLexerInterface::check_lexers(Sci_NotifyHeader* notifyHeader)
         return;
     std::wstring wsFileExt = extensionPtr;
 
-    // make a debug string
+    // check if extension found in map:
     pcjHelper::delNull(wsFileName);
     pcjHelper::delNull(wsFileExt);
-    std::wstring wsMsg = wsFileName;
     if (!wsFileExt.empty()) {
         if (wsFileExt.data()[0] == L'.')
             wsFileExt.erase(0, 1);      // remove
-        wsMsg += std::wstring(L" => ") + wsFileExt;
+        auto map_iter = _mapExt2Lexer.find(wsFileExt);
+        if (map_iter != _mapExt2Lexer.end()) {
+            // if found, apply that lexer
+            apply_lexer(map_iter->second);
+        }
     }
-    ::MessageBox(nppData._nppHandle, wsMsg.data(), L"HiddenLexer check_lexers", MB_OK);
 }
+
+// apply the appropriate lexer
+void HiddenLexerInterface::apply_lexer(std::wstring wsLexerName)
+{
+    // must create it every time (tried caching it, and it complained)
+    LPARAM iLexer = ::SendMessage(nppData._nppHandle, NPPM_CREATELEXER, 0, reinterpret_cast<LPARAM>(wsLexerName.data()));
+    // if it's found now (either inherit original find, or inherit the second find after being created)
+    if (iLexer) {
+        // then use it
+        ::SendMessage(_curScintillaHwnd, SCI_SETILEXER, 0, iLexer);
+        set_colors(wsLexerName);
+        set_keywords(wsLexerName);
+        set_options(wsLexerName);
+        // 
+    }
+}
+
+// set colors for the appropriate lexer
+void HiddenLexerInterface::set_colors(std::wstring /*wsLexerName*/)
+{
+    // TODO: use data structure to decide on colors for right lexer
+    // for now, hardcode colors
+#define _SCI_RGB(R,G,B) ((R<<0) | (G<<8) | (B<<16))
+    const WPARAM
+        SCE_STATA_DEFAULT = 0,
+        SCE_STATA_COMMENT = 1,
+        SCE_STATA_COMMENTLINE = 2,
+        SCE_STATA_COMMENTBLOCK = 3,
+        SCE_STATA_NUMBER = 4,
+        SCE_STATA_OPERATOR = 5,
+        SCE_STATA_IDENTIFIER = 6,
+        SCE_STATA_STRING = 7,
+        SCE_STATA_TYPE = 8,
+        SCE_STATA_WORD = 9,
+        SCE_STATA_GLOBAL_MACRO = 10,
+        SCE_STATA_MACRO = 11
+        ;
+    LPARAM defFG = ::SendMessage(nppData._nppHandle, NPPM_GETEDITORDEFAULTFOREGROUNDCOLOR, 0, 0);
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_DEFAULT, defFG);
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_COMMENT               , _SCI_RGB(127,159,127)); //
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_COMMENTLINE           , _SCI_RGB(127,159,127)); //
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_COMMENTBLOCK          , _SCI_RGB(127,159,127)); //
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_NUMBER                , _SCI_RGB(140,208,211)); //
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_OPERATOR              , _SCI_RGB(159,157,109)); //
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_IDENTIFIER            , _SCI_RGB(220,220,204)); //
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_STRING                , _SCI_RGB(204,147,147)); //
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_TYPE                  , _SCI_RGB(147,224,227)); //    # KeyWords(1)
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_WORD                  , _SCI_RGB(223,196,125)); //    # KeyWords(0)
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_GLOBAL_MACRO          , _SCI_RGB(206,223,153)); //    # not implemented that I can see in LexStata.cxx
+    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_MACRO                 , _SCI_RGB(206,223,153)); //    # not implemented that I can see in LexStata.cxx
+#undef _SCI_RGB
+}
+
+// set keywords for the appropriate lexer
+void HiddenLexerInterface::set_keywords(std::wstring /*wsLexerName*/)
+{
+    // TODO: use data structure to populate keyword sets
+    // for now, hardcode keywords
+    ::SendMessage(_curScintillaHwnd, SCI_SETKEYWORDS, 0, reinterpret_cast<LPARAM>("anova by ci clear correlate describe diagplot drop edit exit gen generate graph help if infile input list log lookup oneway pcorr plot predict qnorm regress replace save sebarr set sort stem summ summarize tab tabulate test ttest use"));
+    ::SendMessage(_curScintillaHwnd, SCI_SETKEYWORDS, 1, reinterpret_cast<LPARAM>("byte int long float double strL str"));
+
+}
+
+// set options for the appropriate lexer
+void HiddenLexerInterface::set_options(std::wstring /*wsLexerName*/)
+{
+    return;
+}
+
+
