@@ -96,5 +96,50 @@ namespace pcjHelper
 		return true;
 	}
 
+	// writes the contents to the given path, creating any parent directories as needed
+	//	return true on success, false on failure, with MessageBox to explain errors
+	bool write_file_wrapper(std::wstring wsPath, std::string sContents)
+	{
+		std::wstring wsDir = wsPath;
+		PathRemoveFileSpec(const_cast<LPWSTR>(wsDir.data()));
+
+		if (!PathFileExists(wsDir.c_str())) {
+			BOOL stat = RecursiveCreateDirectory(wsDir.c_str());
+			if (!stat) return false;	// cannot write a file in that directory if directory does not exist
+		}
+
+		HANDLE hFile = CreateFile(wsPath.c_str(), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hFile == INVALID_HANDLE_VALUE) {
+			DWORD errNum = GetLastError();
+			LPWSTR messageBuffer = nullptr;
+			FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+				nullptr, errNum, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPWSTR)&messageBuffer, 0, nullptr);
+			std::wstring errmsg = L"Error when trying to create \"" + wsPath + L"\": " + std::to_wstring(errNum) + L":\n" + messageBuffer + L"\n";
+			::MessageBox(NULL, errmsg.c_str(), L"XSD Error", MB_ICONERROR);
+			LocalFree(messageBuffer);
+			wsPath = L"";
+			return false;
+		}
+
+		DWORD bytesWritten = 0;
+		DWORD bytesToWrite = static_cast<DWORD>(sContents.size() * sizeof(sContents[0]));
+		BOOL success = WriteFile(hFile, sContents.c_str(), bytesToWrite, &bytesWritten, NULL);
+		if (!success) {
+			DWORD errNum = GetLastError();
+			LPWSTR messageBuffer = nullptr;
+			FormatMessageW(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+				nullptr, errNum, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPWSTR)&messageBuffer, 0, nullptr);
+			std::wstring errmsg = L"Error when trying to write to \"" + wsPath + L"\": " + std::to_wstring(errNum) + L":\n" + messageBuffer + L"\n";
+			::MessageBox(NULL, errmsg.c_str(), L"XSD Error", MB_ICONERROR);
+			LocalFree(messageBuffer);
+			wsPath = L"";
+			CloseHandle(hFile);
+			return false;
+		}
+
+		CloseHandle(hFile);
+		return true;
+	}
+
 
 };

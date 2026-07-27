@@ -15,6 +15,10 @@ public:
 	// instantiate interface
 	HiddenLexerInterface(void);
 
+	// launch the hidden lexer interface, so it will start handling the lexers for the active
+	//		(keep this separate from instantiation, so that code can control when certain setup occurs)
+	void launch(void);
+
 	// check if the active file needs to use a hidden lexer
 	void check_lexers(Sci_NotifyHeader* notifyHeader);
 

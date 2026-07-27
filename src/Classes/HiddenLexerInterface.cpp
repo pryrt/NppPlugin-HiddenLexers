@@ -1,12 +1,22 @@
 #include "HiddenLexerInterface.h"
+#include "ConfigFromJson.h"
 
 HiddenLexerInterface::HiddenLexerInterface(void)
 {
-    gNppMetaInfo.populate();
-    // TODO: read config file (if it exists) and populate intitial data structures
-    // For now, hardcode an example
-    _mapExt2Lexer.emplace(L"stata", L"stata");
+    _mapExt2Lexer.clear();
     _curScintillaHwnd = nullptr;
+}
+
+// launch the hidden lexer interface, so it will start handling the lexers for the active
+//		(keep this separate from instantiation, so that code can control when certain setup occurs)
+
+void HiddenLexerInterface::launch(void)
+{
+    gNppMetaInfo.populate();
+    // read config file (if it exists) and populate intitial data structures
+    read_config();
+    // TODO: add lexers per the config; For now, hardcode an example
+    _mapExt2Lexer.emplace(L"stata", L"stata");
 }
 
 void HiddenLexerInterface::check_lexers(Sci_NotifyHeader* notifyHeader)
@@ -132,7 +142,8 @@ void HiddenLexerInterface::set_options(std::wstring /*wsLexerName*/)
 
 
 // read plugin config file
-bool read_config(void)
+bool HiddenLexerInterface::read_config(void)
 {
+    ConfigFromJson oCfgReader;
     return false;
 }

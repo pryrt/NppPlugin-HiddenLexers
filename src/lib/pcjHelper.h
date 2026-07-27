@@ -20,5 +20,8 @@ namespace pcjHelper
 	// checks if a given directory is writeable
 	bool is_dir_writable(const std::wstring& path);
 
+	// writes the contents to the given path, creating any parent directories as needed
+	//	return true on success, false on failure, with MessageBox to explain errors
+	bool write_file_wrapper(std::wstring wsPath, std::string sContents);
 };
 

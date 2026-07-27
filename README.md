@@ -8,8 +8,7 @@ A Notepad++ Plugin that allows users to enable 'hidden' Lexilla lexers in Notepa
 
 ## Explanation
 
-Notepad++ ships with 90+ language "lexers" (syntax highlighters) enabled from the Lexilla library.  But Lexilla actually includes many more that Notepad++ doesn't include.
-Based on an old script for the PythonScript plugin, this new Plugin will allow users to configure one or more of those hidden lexers to be used for particular
+Notepad++ ships with 90+ language "lexers" (syntax highlighters) enabled from the Lexilla library.  But Lexilla actually includes many more lexers that Notepad++ doesn't activate. Based on an old script for the PythonScript plugin, this new Plugin will allow users to configure one or more of those hidden lexers to be used for particular.
 
 ## Installation
 

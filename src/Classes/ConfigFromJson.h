@@ -11,5 +11,7 @@ public:
 	void* get_options_for_lexer(std::wstring wsLexer);								// return the option structure for a given lexer		; TODO=change return type
 
 private:
-	std::wstring _wsConfigFilePath;
+	std::wstring _wsConfigFilePath;		// stores the full path of the JSONC file
+
+	bool _cfg_exists_or_created(void);	// returns true if the cfg file and directory already exists, or if it was successfully created; false if there's a problem
 };

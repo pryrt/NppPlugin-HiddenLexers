@@ -60,6 +60,7 @@ void pluginCleanUp()
 void metaInfoInit()
 {
     gNppMetaInfo.populate();
+    gHiddenLexerInterface.launch();
 }
 
 //
