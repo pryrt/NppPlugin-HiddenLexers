@@ -14,9 +14,7 @@ void HiddenLexerInterface::launch(void)
 {
     gNppMetaInfo.populate();
     // read config file (if it exists) and populate intitial data structures
-    read_config();
-    // TODO: add lexers per the config; For now, hardcode an example
-    _mapExt2Lexer.emplace(L"stata", L"stata");
+    configure();
 }
 
 void HiddenLexerInterface::check_lexers(Sci_NotifyHeader* notifyHeader)
@@ -141,9 +139,14 @@ void HiddenLexerInterface::set_options(std::wstring /*wsLexerName*/)
 }
 
 
-// read plugin config file
-bool HiddenLexerInterface::read_config(void)
+// read plugin config file and apply to the HiddenLexerInterface map structures
+bool HiddenLexerInterface::configure(void)
 {
     ConfigFromJson oCfgReader;
+    if (oCfgReader.get_status()) {
+        _mapExt2Lexer = oCfgReader.getExt2Lex();
+        // TODO: similar for the styler info and options
+        return true;
+    }
     return false;
 }

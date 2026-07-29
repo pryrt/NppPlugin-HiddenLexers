@@ -34,8 +34,8 @@ public:
 	// set options for the appropriate lexer
 	void set_options(std::wstring wsLexerName);
 
-	// read plugin config file
-	bool read_config(void);
+	// read plugin config file and apply to the HiddenLexerInterface map structures
+	bool configure(void);
 
 private:
 	HWND _curScintillaHwnd;
