@@ -103,10 +103,17 @@ bool ConfigFromJson::_parse_config_json(void)
     if (!cfgdata.contains("extensions") || !cfgdata["extensions"].is_object())
         throw std::runtime_error("JSON must contain 'extensions' object");
 
-    // go through each extension/lexer pair
-    for (const auto item : cfgdata["extensions"].items()) {
+    // make sure it has the lexers object
+    if (!cfgdata.contains("lexers") || !cfgdata["lexers"].is_object())
+        throw std::runtime_error("JSON must contain 'lexers' object");
+
+    // process each ext in the extensions object, and add the extension/lexer pairs to the map
+    for (const auto& item : cfgdata["extensions"].items()) {
         if (!item.value().is_string())
-            throw std::runtime_error("JSON 'extensions' must contain 'ext': 'lexerName' string-pairs");
+        {
+            std::string errmsg = std::string("JSON 'extensions' must contain 'ext': 'lexerName' string-pairs\nProblem with ") + item.key();
+            throw std::runtime_error(errmsg);
+        }
 
         // extract key/value strings
         std::string k = item.key();
@@ -119,6 +126,24 @@ bool ConfigFromJson::_parse_config_json(void)
 
         // store in the map
         _mExt2Lex[wsExt] = wsLex;
+
+    }
+
+    // process each lexer in the lexers object
+    for (const auto& oLex : cfgdata["lexers"].items()) {
+        if (!oLex.value().is_object())
+        {
+            std::string errmsg = std::string("JSON 'lexers' must contain 'lexerName': {...} pairs\nProblem with ") + oLex.key();
+            throw std::runtime_error(errmsg);
+        }
+
+        for (const auto& item : oLex.value().items()) {
+            if (!item.value().is_object())
+            {
+                std::string errmsg = std::string("JSON lexer info must contain 'styleID': {...} or 'options': {...} pairs\nProblem with lexer=") + oLex.key() + " key=" + item.key();
+                throw std::runtime_error(errmsg);
+            }
+        }
 
     }
 
