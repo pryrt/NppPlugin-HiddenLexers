@@ -45,10 +45,24 @@ std::wstring ConfigFromJson::get_lexer_name(std::wstring /*wsExtension*/)
 	return std::wstring(L"");
 }
 
+// return value for lexerInfoNotFound
+ts_StyleInfo lexerInfoNotFound{ "","","",false,false,false };
+
 // return the style info for a given lexer and styleID	; TODO=change return type
-void* ConfigFromJson::get_style_info_for_lexer(std::wstring /*wsLexer*/, std::wstring /*wsStyleID*/)
+ts_StyleInfo& ConfigFromJson::get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID)
 {
-	return nullptr;
+    std::string sLexer = pcjHelper::wstring_to_utf8(wsLexer);
+    std::string sStyleID = pcjHelper::wstring_to_utf8(wsStyleID);
+
+    auto map_iter = _mStyles.find(sLexer);
+    if (map_iter == _mStyles.end())
+        return lexerInfoNotFound;
+
+    auto style_iter = _mStyles[sLexer].find(sStyleID);
+    if (style_iter == _mStyles[sLexer].end())
+        return lexerInfoNotFound;
+
+    return _mStyles[sLexer][sStyleID];
 }
 
 // return the option structure for a given lexer		; TODO=change return type
@@ -137,14 +151,44 @@ bool ConfigFromJson::_parse_config_json(void)
             throw std::runtime_error(errmsg);
         }
 
-        for (const auto& item : oLex.value().items()) {
-            if (!item.value().is_object())
+        // process each entry in this lexer object
+        t_StylerMap thisStyler;
+        for (const auto& stylePair : oLex.value().items()) {
+            if (!stylePair.value().is_object())
             {
-                std::string errmsg = std::string("JSON lexer info must contain 'styleID': {...} or 'options': {...} pairs\nProblem with lexer=") + oLex.key() + " key=" + item.key();
+                std::string errmsg = std::string("JSON lexer info must contain 'styleID': {...} or 'options': {...} pairs\nProblem with lexer=") + oLex.key() + " key=" + stylePair.key();
                 throw std::runtime_error(errmsg);
             }
-        }
+            const std::string sStyleID = stylePair.key();
+            const auto& oStyle = stylePair.value();
+            if (std::string(stylePair.key()) != "options") {
+                ts_StyleInfo thisStyle{ "","","" };
 
+                for (const auto& styleAttrib: oStyle.items()) {
+                    std::string thisVal;
+                    styleAttrib.value().get_to(thisVal);
+                    if (styleAttrib.key() == "fgColor")
+                        thisStyle.fgColor = thisVal;
+                    else if (styleAttrib.key() == "bgColor")
+                        thisStyle.bgColor = thisVal;
+                    else if (styleAttrib.key() == "fontStyle") {
+                        if (thisVal == "")
+                            thisVal = "0";
+                        thisStyle.fontStyle = thisVal;
+                        int val = std::stoi(thisVal);
+                        thisStyle.isBold = val & 0x01;
+                        thisStyle.isItalic = val & 0x02;
+                        thisStyle.isUnderline = val & 0x04;
+                    }
+                }
+
+                thisStyler[stylePair.key()] = thisStyle;
+
+                //std::string errmsg = std::string("JSON debugging: ") + oLex.key() + "." + sStyleID + " => " + std::string(oStyle.dump());
+                //::MessageBoxA(gNppMetaInfo.hwnd._nppHandle, errmsg.c_str(), "HiddenLexers: Data Debug", MB_OK);
+            }
+        }
+        _mStyles[oLex.key()] = thisStyler;
     }
 
     return true;

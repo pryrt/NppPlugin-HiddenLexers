@@ -3,6 +3,7 @@
 #include "menuCmdID.h"
 #include "NppMetaClass.h"
 #include "Version.h"
+#include "ConfigFromJson.h"
 #include <windows.h>
 #include <wininet.h>
 #include <pathcch.h>
@@ -37,9 +38,16 @@ public:
 	// read plugin config file and apply to the HiddenLexerInterface map structures
 	bool configure(void);
 
+	// return the style info for a given lexer and styleID
+	ts_StyleInfo& get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID);
+	// return the style info for a given lexer and styleID
+	ts_StyleInfo& get_style_info_for_lexer(std::string sLexer, std::string sStyleID);
+
+
 private:
 	HWND _curScintillaHwnd;
 	std::map<std::wstring, std::wstring> _mapExt2Lexer;
+	std::map<std::string, t_StylerMap> _mapStyles;
 };
 
 extern HiddenLexerInterface gHiddenLexerInterface;

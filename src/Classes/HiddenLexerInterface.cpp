@@ -4,6 +4,7 @@
 HiddenLexerInterface::HiddenLexerInterface(void)
 {
     _mapExt2Lexer.clear();
+    _mapStyles.clear();
     _curScintillaHwnd = nullptr;
 }
 
@@ -145,8 +146,32 @@ bool HiddenLexerInterface::configure(void)
     ConfigFromJson oCfgReader;
     if (oCfgReader.get_status()) {
         _mapExt2Lexer = oCfgReader.getExt2Lex();
+        _mapStyles = oCfgReader.getStyles();
         // TODO: similar for the styler info and options
         return true;
     }
     return false;
 }
+
+// return the style info for a given lexer and styleID
+ts_StyleInfo& HiddenLexerInterface::get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID)
+{
+    std::string sLexer = pcjHelper::wstring_to_utf8(wsLexer);
+    std::string sStyleID = pcjHelper::wstring_to_utf8(wsStyleID);
+    return get_style_info_for_lexer(sLexer, sStyleID);
+}
+
+// return the style info for a given lexer and styleID
+ts_StyleInfo& HiddenLexerInterface::get_style_info_for_lexer(std::string sLexer, std::string sStyleID)
+{
+    auto map_iter =  _mapStyles.find(sLexer);
+    if (map_iter == _mapStyles.end())
+        return lexerInfoNotFound;
+
+    auto style_iter = _mapStyles[sLexer].find(sStyleID);
+    if (style_iter == _mapStyles[sLexer].end())
+        return lexerInfoNotFound;
+
+    return _mapStyles[sLexer][sStyleID];
+}
+
