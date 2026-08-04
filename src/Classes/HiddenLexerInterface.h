@@ -27,30 +27,30 @@ public:
 	void apply_lexer(std::wstring wsLexerName);
 
 	// set colors for the appropriate lexer
-	void set_colors(std::wstring wsLexerName);
-
-	// set colors for the appropriate lexer
-	void set_colors(std::string sLexerName);
+	void set_colors(std::wstring wsLexerName);		// set colors for the appropriate lexer
+	void set_colors(std::string sLexerName);		// set colors for the appropriate lexer
 
 	// set keywords for the appropriate lexer
-	void set_keywords(std::wstring wsLexerName);
+	void set_keywords(std::wstring wsLexerName);	// set keywords for the appropriate lexer
+	void set_keywords(std::string sLexerName);		// set keywords for the appropriate lexer
 
 	// set options for the appropriate lexer
-	void set_options(std::wstring wsLexerName);
+	void set_options(std::wstring wsLexerName);		// set options for the appropriate lexer
+	void set_options(std::string sLexerName);		// set options for the appropriate lexer
 
 	// read plugin config file and apply to the HiddenLexerInterface map structures
 	bool configure(void);
 
 	// return the style info for a given lexer and styleID
-	ts_StyleInfo& get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID);
-	// return the style info for a given lexer and styleID
-	ts_StyleInfo& get_style_info_for_lexer(std::string sLexer, std::string sStyleID);
+	ts_StyleInfo& get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID);	// return the style info for a given lexer and styleID
+	ts_StyleInfo& get_style_info_for_lexer(std::string sLexer, std::string sStyleID);		// return the style info for a given lexer and styleID
 
 
 private:
 	HWND _curScintillaHwnd;
 	std::map<std::wstring, std::wstring> _mapExt2Lexer;
 	std::map<std::string, t_StylerMap> _mapStyles;
+	std::map <std::string, std::string[9]> _mapKeywords;
 };
 
 extern HiddenLexerInterface gHiddenLexerInterface;

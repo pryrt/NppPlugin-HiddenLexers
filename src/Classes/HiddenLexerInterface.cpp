@@ -125,21 +125,42 @@ void HiddenLexerInterface::set_colors(std::string sLexerName)
 }
 
 // set keywords for the appropriate lexer
-void HiddenLexerInterface::set_keywords(std::wstring /*wsLexerName*/)
+void HiddenLexerInterface::set_keywords(std::wstring wsLexerName)
+{
+    std::string sLexerName = pcjHelper::wstring_to_utf8(wsLexerName);
+    set_keywords(sLexerName);
+}
+
+// set keywords for the appropriate lexer
+void HiddenLexerInterface::set_keywords(std::string sLexerName)
 {
     // TODO: use data structure to populate keyword sets
     // for now, hardcode keywords
-    ::SendMessage(_curScintillaHwnd, SCI_SETKEYWORDS, 0, reinterpret_cast<LPARAM>("anova by ci clear correlate describe diagplot drop edit exit gen generate graph help if infile input list log lookup oneway pcorr plot predict qnorm regress replace save sebarr set sort stem summ summarize tab tabulate test ttest use"));
-    ::SendMessage(_curScintillaHwnd, SCI_SETKEYWORDS, 1, reinterpret_cast<LPARAM>("byte int long float double strL str"));
+    //::SendMessage(_curScintillaHwnd, SCI_SETKEYWORDS, 0, reinterpret_cast<LPARAM>("anova by ci clear correlate describe diagplot drop edit exit gen generate graph help if infile input list log lookup oneway pcorr plot predict qnorm regress replace save sebarr set sort stem summ summarize tab tabulate test ttest use"));
+    //::SendMessage(_curScintillaHwnd, SCI_SETKEYWORDS, 1, reinterpret_cast<LPARAM>("byte int long float double strL str"));
+
+    auto map_iter = _mapKeywords.find(sLexerName);
+    if (map_iter == _mapKeywords.end())
+        return;
+
+    for (WPARAM i = 0; i < 9; i++) {
+        ::SendMessage(_curScintillaHwnd, SCI_SETKEYWORDS, i, reinterpret_cast<LPARAM>(_mapKeywords[sLexerName][i].c_str()));
+    }
 
 }
 
 // set options for the appropriate lexer
-void HiddenLexerInterface::set_options(std::wstring /*wsLexerName*/)
+void HiddenLexerInterface::set_options(std::wstring wsLexerName)
+{
+    std::string sLexerName = pcjHelper::wstring_to_utf8(wsLexerName);
+    set_options(sLexerName);
+}
+
+// set options for the appropriate lexer
+void HiddenLexerInterface::set_options(std::string /*sLexerName*/)
 {
     return;
 }
-
 
 // read plugin config file and apply to the HiddenLexerInterface map structures
 bool HiddenLexerInterface::configure(void)
@@ -148,7 +169,8 @@ bool HiddenLexerInterface::configure(void)
     if (oCfgReader.get_status()) {
         _mapExt2Lexer = oCfgReader.getExt2Lex();
         _mapStyles = oCfgReader.getStyles();
-        // TODO: similar for the styler info and options
+        _mapKeywords = oCfgReader.getKeywords();
+        // TODO: similar for the styler options
         return true;
     }
     return false;

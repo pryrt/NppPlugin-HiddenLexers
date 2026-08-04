@@ -29,6 +29,7 @@ public:
 	bool get_status() { return _status; }											// returns the status of the read, true if successful
 	std::map <std::wstring, std::wstring>& getExt2Lex(void) { return _mExt2Lex; }		// returns the map of extension:lexer pairs
 	std::map <std::string, t_StylerMap>& getStyles(void) { return _mStyles; }			// returns the map of lexer:stylerMap pairs (each stylerMap contains pairs of styleID:structure)
+	std::map <std::string, std::string[9]>& getKeywords(void) { return _mKeywords; }	// returns the map of lexer:[keywords,...]
 
 private:
 	// private data:
@@ -36,6 +37,7 @@ private:
 	std::wstring _wsConfigFilePath;						// stores the full path of the JSON file
 	std::map <std::wstring, std::wstring> _mExt2Lex;	// maps extension:lexer pairs
 	std::map <std::string, t_StylerMap> _mStyles;		// maps lexer:<styleID:ts_StyleInfo>
+	std::map <std::string, std::string[9]> _mKeywords;	// maps lexer:[array-of-keyword-strings]
 
 	// private methods:
 	bool _cfg_exists_or_created(void);					// returns true if the cfg file and directory already exists, or if it was successfully created; false if there's a problem

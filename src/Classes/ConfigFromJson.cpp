@@ -97,7 +97,12 @@ bool ConfigFromJson::_cfg_exists_or_created(void)
       "9" : { "fgColor": "DFC47D", "bgColor": "3F3F3F", "fontStyle": "0" },
       "10" : { "fgColor": "CEDF99", "bgColor": "3F3F3F", "fontStyle": "0" },
       "11" : { "fgColor": "CEDF99", "bgColor": "3F3F3F", "fontStyle": "0" },
-      "options": {}
+      "options": {},
+      "keywords": [
+        "anova by ci clear correlate describe diagplot drop edit exit gen generate graph help if infile input list log lookup oneway pcorr plot predict qnorm regress replace save sebarr set sort stem summ summarize tab tabulate test ttest use",
+        "byte int long float double strL str",
+        "", "", "", "", "", "", ""
+      ]
     }
   }
 }
@@ -151,17 +156,47 @@ bool ConfigFromJson::_parse_config_json(void)
             throw std::runtime_error(errmsg);
         }
 
+        std::string sLexerName = oLex.key();
+
         // process each entry in this lexer object
         t_StylerMap thisStyler;
         for (const auto& stylePair : oLex.value().items()) {
-            if (!stylePair.value().is_object())
+            if (!(stylePair.value().is_object() || stylePair.value().is_array()))
             {
-                std::string errmsg = std::string("JSON lexer info must contain 'styleID': {...} or 'options': {...} pairs\nProblem with lexer=") + oLex.key() + " key=" + stylePair.key();
+                std::string errmsg = std::string("JSON lexer info must contain 'styleID': {...} or 'options': {...} or 'keywords': [] pairs\nProblem with lexer=") + sLexerName + " key=" + stylePair.key();
                 throw std::runtime_error(errmsg);
             }
             const std::string sStyleID = stylePair.key();
             const auto& oStyle = stylePair.value();
-            if (std::string(stylePair.key()) != "options") {
+            if (std::string(stylePair.key()) == "options") {
+                ;
+            }
+            else if (std::string(stylePair.key()) == "keywords") {
+                if (!stylePair.value().is_array())
+                {
+                    std::string errmsg = std::string("JSON lexer info keywords must contain array of strings\nProblem with lexer=") + sLexerName + " key=" + stylePair.key();
+                    throw std::runtime_error(errmsg);
+                }
+                for (const auto& itemKeyword : stylePair.value().items()) {
+                    auto idx = std::stoul(itemKeyword.key(), nullptr, 10);
+                    std::string sKeywords = itemKeyword.value();
+                    if (0 <= idx && idx <= 8) {
+                        try {
+                            _mKeywords[sLexerName][idx] = sKeywords;
+                        }
+                        catch (std::exception& e) {
+                            std::string msg = std::string("JSON lexer exception: ") + e.what();
+                            ::MessageBoxA(gNppMetaInfo.hwnd._nppHandle, msg.c_str(), "HiddenLexers: JSON lexer exception", MB_ICONERROR);
+                            _status = false;
+                        }
+                    }
+                    else {
+                        std::string errmsg = std::string("JSON lexer info keywords must contain array of 9 strings\nProblem with lexer=") + sLexerName + " key=" + stylePair.key() + " idx=" + itemKeyword.key();
+                        throw std::runtime_error(errmsg);
+                    }
+                }
+            }
+            else {  // actual style
                 ts_StyleInfo thisStyle{ "","","", false, false, false };
 
                 for (const auto& styleAttrib: oStyle.items()) {
