@@ -83,6 +83,7 @@ void HiddenLexerInterface::apply_lexer(std::wstring wsLexerName)
         set_colors(wsLexerName);
         set_keywords(wsLexerName);
         set_options(wsLexerName);
+        ::SendMessage(nppData._nppHandle, NPPM_SETSTATUSBAR, STATUSBAR_DOC_TYPE, reinterpret_cast<LPARAM>(wsLexerName.data()));
         // 
     }
 }
