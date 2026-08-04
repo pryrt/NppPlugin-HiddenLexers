@@ -4,13 +4,13 @@
 
 struct ts_StyleInfo {
 	std::string
-		fgColor,
-		bgColor,
-		fontStyle;
+		fgColor = "",
+		bgColor = "",
+		fontStyle = "";
 	bool
-		isBold,
-		isItalic,
-		isUnderline;
+		isBold = false,
+		isItalic = false,
+		isUnderline = false;
 };
 typedef std::map <std::string, ts_StyleInfo> t_StylerMap;
 extern ts_StyleInfo lexerInfoNotFound;

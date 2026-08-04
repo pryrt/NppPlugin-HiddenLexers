@@ -88,39 +88,40 @@ void HiddenLexerInterface::apply_lexer(std::wstring wsLexerName)
 }
 
 // set colors for the appropriate lexer
-void HiddenLexerInterface::set_colors(std::wstring /*wsLexerName*/)
+void HiddenLexerInterface::set_colors(std::wstring wsLexerName)
 {
-    // TODO: use data structure to decide on colors for right lexer
-    // for now, hardcode colors
-#define _SCI_RGB(R,G,B) ((R<<0) | (G<<8) | (B<<16))
-    const WPARAM
-        SCE_STATA_DEFAULT = 0,
-        SCE_STATA_COMMENT = 1,
-        SCE_STATA_COMMENTLINE = 2,
-        SCE_STATA_COMMENTBLOCK = 3,
-        SCE_STATA_NUMBER = 4,
-        SCE_STATA_OPERATOR = 5,
-        SCE_STATA_IDENTIFIER = 6,
-        SCE_STATA_STRING = 7,
-        SCE_STATA_TYPE = 8,
-        SCE_STATA_WORD = 9,
-        SCE_STATA_GLOBAL_MACRO = 10,
-        SCE_STATA_MACRO = 11
-        ;
+    std::string sLexerName = pcjHelper::wstring_to_utf8(wsLexerName);
+    set_colors(sLexerName);
+}
+
+// set colors for the appropriate lexer
+void HiddenLexerInterface::set_colors(std::string sLexerName)
+{
+    auto map_iter = _mapStyles.find(sLexerName);
+    if (map_iter == _mapStyles.end())
+        return;
+
+    auto rrggbb2ul = [](std::string rrggbb) {
+        std::string bbggrr = { rrggbb[4], rrggbb[5], rrggbb[2], rrggbb[3], rrggbb[0], rrggbb[1] };
+        return std::stoul(bbggrr, nullptr, 16);
+    };
+
     LPARAM defFG = ::SendMessage(nppData._nppHandle, NPPM_GETEDITORDEFAULTFOREGROUNDCOLOR, 0, 0);
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_DEFAULT, defFG);
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_COMMENT               , _SCI_RGB(127,159,127)); //
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_COMMENTLINE           , _SCI_RGB(127,159,127)); //
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_COMMENTBLOCK          , _SCI_RGB(127,159,127)); //
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_NUMBER                , _SCI_RGB(140,208,211)); //
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_OPERATOR              , _SCI_RGB(159,157,109)); //
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_IDENTIFIER            , _SCI_RGB(220,220,204)); //
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_STRING                , _SCI_RGB(204,147,147)); //
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_TYPE                  , _SCI_RGB(147,224,227)); //    # KeyWords(1)
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_WORD                  , _SCI_RGB(223,196,125)); //    # KeyWords(0)
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_GLOBAL_MACRO          , _SCI_RGB(206,223,153)); //    # not implemented that I can see in LexStata.cxx
-    ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, SCE_STATA_MACRO                 , _SCI_RGB(206,223,153)); //    # not implemented that I can see in LexStata.cxx
-#undef _SCI_RGB
+    LPARAM defBG = ::SendMessage(nppData._nppHandle, NPPM_GETEDITORDEFAULTBACKGROUNDCOLOR, 0, 0);
+
+    for (const auto& styleRow : _mapStyles[sLexerName]) {
+        std::string sStyleID = styleRow.first;
+        WPARAM ulStyleID = static_cast<WPARAM>(std::stoul(sStyleID, nullptr, 10));
+        auto oStyleInfo = styleRow.second;
+        LPARAM fgVal = (oStyleInfo.fgColor != "") ? static_cast<LPARAM>(rrggbb2ul(oStyleInfo.fgColor)) : defFG;
+        LPARAM bgVal = (oStyleInfo.bgColor != "") ? static_cast<LPARAM>(rrggbb2ul(oStyleInfo.bgColor)) : defBG;
+
+        ::SendMessage(_curScintillaHwnd, SCI_STYLESETFORE, ulStyleID, fgVal);
+        ::SendMessage(_curScintillaHwnd, SCI_STYLESETBACK, ulStyleID, bgVal);
+        ::SendMessage(_curScintillaHwnd, SCI_STYLESETBOLD, ulStyleID, oStyleInfo.isBold);
+        ::SendMessage(_curScintillaHwnd, SCI_STYLESETITALIC, ulStyleID, oStyleInfo.isItalic);
+        ::SendMessage(_curScintillaHwnd, SCI_STYLESETUNDERLINE, ulStyleID, oStyleInfo.isUnderline);
+    }
 }
 
 // set keywords for the appropriate lexer

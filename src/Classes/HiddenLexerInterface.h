@@ -29,6 +29,9 @@ public:
 	// set colors for the appropriate lexer
 	void set_colors(std::wstring wsLexerName);
 
+	// set colors for the appropriate lexer
+	void set_colors(std::string sLexerName);
+
 	// set keywords for the appropriate lexer
 	void set_keywords(std::wstring wsLexerName);
 

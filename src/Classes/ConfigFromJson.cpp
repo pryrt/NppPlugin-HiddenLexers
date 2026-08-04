@@ -162,7 +162,7 @@ bool ConfigFromJson::_parse_config_json(void)
             const std::string sStyleID = stylePair.key();
             const auto& oStyle = stylePair.value();
             if (std::string(stylePair.key()) != "options") {
-                ts_StyleInfo thisStyle{ "","","" };
+                ts_StyleInfo thisStyle{ "","","", false, false, false };
 
                 for (const auto& styleAttrib: oStyle.items()) {
                     std::string thisVal;
