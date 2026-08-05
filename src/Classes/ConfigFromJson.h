@@ -20,7 +20,7 @@ public:
 	ConfigFromJson(void);	// instantiate and read
 
 	// public methods:
-	std::wstring get_config_file_path(void);										// return the path name for the config file
+	std::wstring get_config_file_path(void) { return _wsConfigFilePath; };			// return the path name for the config file as a std::wstring
 	std::wstring get_lexer_name(std::wstring wsExtension);							// return the lexer name for the given extension
 	ts_StyleInfo& get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID);	// return the style info for a given lexer and styleID
 	void* get_options_for_lexer(std::wstring wsLexer);								// return the option structure for a given lexer		; TODO=change return type

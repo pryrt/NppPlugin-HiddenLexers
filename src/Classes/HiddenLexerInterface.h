@@ -23,6 +23,9 @@ public:
 	// check if the active file needs to use a hidden lexer
 	void check_lexers(Sci_NotifyHeader* notifyHeader);
 
+	// check if the saved file is the plugin JSON file
+	void check_nppn_saved_json(Sci_NotifyHeader* notifyHeader);
+
 	// apply the appropriate lexer
 	void apply_lexer(std::wstring wsLexerName);
 
@@ -45,12 +48,15 @@ public:
 	ts_StyleInfo& get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID);	// return the style info for a given lexer and styleID
 	ts_StyleInfo& get_style_info_for_lexer(std::string sLexer, std::string sStyleID);		// return the style info for a given lexer and styleID
 
+	// edit the JSON file in Notepad++
+	void HiddenLexerInterface::edit_json(void);
 
 private:
 	HWND _curScintillaHwnd;
 	std::map<std::wstring, std::wstring> _mapExt2Lexer;
 	std::map<std::string, t_StylerMap> _mapStyles;
 	std::map <std::string, std::string[9]> _mapKeywords;
+	std::wstring _wsJsonPath;
 };
 
 extern HiddenLexerInterface gHiddenLexerInterface;

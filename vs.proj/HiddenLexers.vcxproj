@@ -31,11 +31,14 @@
     <ClInclude Include="..\src\Classes\HiddenLexerInterface.h" />
     <ClInclude Include="..\src\Classes\json.hpp" />
     <ClInclude Include="..\src\Classes\NppMetaClass.h" />
+    <ClInclude Include="..\src\Dialogs\AboutDialog.h" />
+    <ClInclude Include="..\src\Dialogs\resource.h" />
     <ClInclude Include="..\src\Dialogs\Version.h" />
     <ClInclude Include="..\src\lib\Hyperlinks.h" />
     <ClInclude Include="..\src\lib\pcjHelper.h" />
     <ClInclude Include="..\src\menuCmdID.h" />
     <ClInclude Include="..\src\Notepad_plus_msgs.h" />
+    <ClInclude Include="..\src\NPP_DarkMode.h" />
     <ClInclude Include="..\src\PluginDefinition.h" />
     <ClInclude Include="..\src\PluginInterface.h" />
     <ClInclude Include="..\src\Scintilla.h" />
@@ -45,12 +48,14 @@
     <ClCompile Include="..\src\Classes\ConfigFromJson.cpp" />
     <ClCompile Include="..\src\Classes\HiddenLexerInterface.cpp" />
     <ClCompile Include="..\src\Classes\NppMetaClass.cpp" />
+    <ClCompile Include="..\src\Dialogs\AboutDialog.cpp" />
     <ClCompile Include="..\src\HiddenLexers.cpp" />
     <ClCompile Include="..\src\lib\Hyperlinks.cpp" />
     <ClCompile Include="..\src\lib\pcjHelper.cpp" />
     <ClCompile Include="..\src\PluginDefinition.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="..\src\Dialogs\AboutDialog.rc" />
     <ResourceCompile Include="..\src\HiddenLexers.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

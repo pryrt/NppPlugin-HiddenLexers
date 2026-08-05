@@ -82,7 +82,11 @@ extern "C" __declspec(dllexport) void beNotified(SCNotification *notifyCode)
 			gHiddenLexerInterface.check_lexers(&notifyCode->nmhdr);
 			break;
 		}
-
+		case NPPN_FILESAVED:
+		{
+			gHiddenLexerInterface.check_nppn_saved_json(&notifyCode->nmhdr);
+			break;
+		}
 		default:
 			return;
 	}

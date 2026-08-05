@@ -18,6 +18,21 @@ void HiddenLexerInterface::launch(void)
     configure();
 }
 
+// check if the saved file is the plugin JSON file
+void HiddenLexerInterface::check_nppn_saved_json(Sci_NotifyHeader* notifyHeader)
+{
+    WPARAM bufferID = static_cast<WPARAM>(notifyHeader->idFrom);
+    LPARAM strsize = ::SendMessage(nppData._nppHandle, NPPM_GETFULLPATHFROMBUFFERID, bufferID, 0);
+    if (strsize != -1) {
+        std::wstring wsSavedPath(strsize + 1, L'\0');
+        ::SendMessage(nppData._nppHandle, NPPM_GETFULLPATHFROMBUFFERID, bufferID, reinterpret_cast<LPARAM>(wsSavedPath.data()));
+        pcjHelper::delNull(wsSavedPath);
+        if (wsSavedPath == _wsJsonPath) {
+            launch();   // reread config, since it just changed
+        }
+    }
+}
+
 void HiddenLexerInterface::check_lexers(Sci_NotifyHeader* notifyHeader)
 {
     // Get the current scintilla
@@ -169,10 +184,16 @@ bool HiddenLexerInterface::configure(void)
 {
     ConfigFromJson oCfgReader;
     if (oCfgReader.get_status()) {
+        _wsJsonPath = oCfgReader.get_config_file_path();
         _mapExt2Lexer = oCfgReader.getExt2Lex();
         _mapStyles = oCfgReader.getStyles();
         _mapKeywords = oCfgReader.getKeywords();
         // TODO: similar for the styler options
+
+        // update the current view with the 
+        Sci_NotifyHeader notifyHeader{ nullptr,0,0 };
+        check_lexers(&notifyHeader);
+
         return true;
     }
     return false;
@@ -200,3 +221,8 @@ ts_StyleInfo& HiddenLexerInterface::get_style_info_for_lexer(std::string sLexer,
     return _mapStyles[sLexer][sStyleID];
 }
 
+// edit the JSON
+void HiddenLexerInterface::edit_json(void)
+{
+    ::SendMessage(nppData._nppHandle, NPPM_DOOPEN, 0, reinterpret_cast<LPARAM>(_wsJsonPath.data()));
+}

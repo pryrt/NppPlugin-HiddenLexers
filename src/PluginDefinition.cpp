@@ -20,7 +20,10 @@
 #include "NppMetaClass.h"
 #include "HiddenLexerInterface.h"
 #include "Version.h"
+#include "AboutDialog.h"
 #include <pathcch.h>
+
+static HANDLE _hModule;
 
 //
 // The plugin data that Notepad++ needs
@@ -43,8 +46,9 @@ HiddenLexerInterface gHiddenLexerInterface;
 //
 // Initialize your plugin data here
 // It will be called while plugin loading   
-void pluginInit(HANDLE /*hModule*/)
+void pluginInit(HANDLE hModule)
 {
+    _hModule = hModule;
 }
 
 //
@@ -79,8 +83,10 @@ void commandMenuInit()
     //            ShortcutKey *shortcut,          // optional. Define a shortcut to trigger this command
     //            bool check0nInit                // optional. Make this menu item be checked visually
     //            );
-    setCommand(0, TEXT("Hello Notepad++"), hello, NULL, false);
-    setCommand(1, TEXT("Hello (with dialog)"), helloDlg, NULL, false);
+    setCommand(1, TEXT("Reread Config"), cmdReloadJson, NULL, false);
+    setCommand(0, TEXT("Edit Config File: HiddenLexers.json"), cmdEditJson, NULL, false);
+    setCommand(2, TEXT(""), NULL, NULL, false);
+    setCommand(3, TEXT("About HiddenLexers"), cmdAboutModal, NULL, false);
 }
 
 //
@@ -114,24 +120,24 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 //----------------------------------------------//
 //-- STEP 4. DEFINE YOUR ASSOCIATED FUNCTIONS --//
 //----------------------------------------------//
-void hello()
+void cmdTBD()
 {
-    // Open a new document
-    ::SendMessage(nppData._nppHandle, NPPM_MENUCOMMAND, 0, IDM_FILE_NEW);
-
-    // Get the current scintilla
-    int which = -1;
-    ::SendMessage(nppData._nppHandle, NPPM_GETCURRENTSCINTILLA, 0, (LPARAM)&which);
-    if (which == -1)
-        return;
-    HWND curScintilla = (which == 0)?nppData._scintillaMainHandle:nppData._scintillaSecondHandle;
-
-    // Say hello now :
-    // Scintilla control has no Unicode mode, so we use (char *) here
-    ::SendMessage(curScintilla, SCI_SETTEXT, 0, (LPARAM)"Hello, Notepad++!");
+    ::MessageBox(NULL, TEXT("Have not yet implemented the action for that command.\nSorry."), TEXT("HiddenLexers: Action Command TBD"), MB_OK);
 }
 
-void helloDlg()
+void cmdAboutModal()
 {
-    ::MessageBox(NULL, TEXT("Hello, Notepad++!"), TEXT("HiddenLexer helloDlg()"), MB_OK);
+    // modal freezes the parent
+    DialogBoxParam((HINSTANCE)_hModule, MAKEINTRESOURCE(IDD_ABOUTDLG), nppData._nppHandle, (DLGPROC)abtDlgProc, (LPARAM)NULL);
+    return;
+}
+
+void cmdEditJson()
+{
+    gHiddenLexerInterface.edit_json();
+}
+
+void cmdReloadJson()
+{
+    gHiddenLexerInterface.launch();
 }

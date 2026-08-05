@@ -37,7 +37,7 @@ const TCHAR NPP_PLUGIN_NAME[] = TEXT("HiddenLexers");
 //
 // Here define the number of your plugin commands
 //
-const int nbFunc = 2;
+const int nbFunc = 4;
 
 
 //
@@ -75,8 +75,9 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 //
 // Your plugin command functions
 //
-void hello();
-void helloDlg();
+void cmdAboutModal();
+void cmdEditJson();
+void cmdReloadJson();
 
 // Plugin internal commands
 
