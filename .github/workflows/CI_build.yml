@@ -6,6 +6,10 @@ jobs:
   build:
 
     runs-on: windows-latest
+
+    permissions:
+      contents: write
+
     strategy:
       max-parallel: 6
       matrix:
