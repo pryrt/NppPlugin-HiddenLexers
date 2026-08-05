@@ -56,6 +56,7 @@ private:
 	std::map<std::wstring, std::wstring> _mapExt2Lexer;
 	std::map<std::string, t_StylerMap> _mapStyles;
 	std::map <std::string, std::string[9]> _mapKeywords;
+	std::map <std::string, std::map <std::string, std::string>> _mapOptions;
 	std::wstring _wsJsonPath;
 };
 

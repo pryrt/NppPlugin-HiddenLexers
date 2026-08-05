@@ -65,12 +65,6 @@ ts_StyleInfo& ConfigFromJson::get_style_info_for_lexer(std::wstring wsLexer, std
     return _mStyles[sLexer][sStyleID];
 }
 
-// return the option structure for a given lexer		; TODO=change return type
-void* ConfigFromJson::get_options_for_lexer(std::wstring /*wsLexer*/)
-{
-	return nullptr;
-}
-
 // returns true if the cfg file and directory already exists, or if it was successfully created; false if there's a problem
 bool ConfigFromJson::_cfg_exists_or_created(void)
 {
@@ -169,7 +163,16 @@ bool ConfigFromJson::_parse_config_json(void)
             const std::string sStyleID = stylePair.key();
             const auto& oStyle = stylePair.value();
             if (std::string(stylePair.key()) == "options") {
-                ;
+                if (!stylePair.value().is_object())
+                {
+                    std::string errmsg = std::string("JSON lexer info options must contain an object of \"variable\": \"value\" pairs\nProblem with lexer = ") + sLexerName + " key = " + stylePair.key();
+                    throw std::runtime_error(errmsg);
+                }
+                for (const auto& itemOption : stylePair.value().items()) {
+                    std::string sOptionName = itemOption.key();
+                    std::string sOptionValue = itemOption.value();
+                    _mOptions[sLexerName][sOptionName] = sOptionValue;
+                }
             }
             else if (std::string(stylePair.key()) == "keywords") {
                 if (!stylePair.value().is_array())
@@ -223,7 +226,7 @@ bool ConfigFromJson::_parse_config_json(void)
                 //::MessageBoxA(gNppMetaInfo.hwnd._nppHandle, errmsg.c_str(), "HiddenLexers: Data Debug", MB_OK);
             }
         }
-        _mStyles[oLex.key()] = thisStyler;
+        _mStyles[sLexerName] = thisStyler;
     }
 
     return true;
