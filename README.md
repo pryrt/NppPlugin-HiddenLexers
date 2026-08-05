@@ -29,8 +29,7 @@ The configuration file for the plugin will be in `plugins\config\HiddenLexers\` 
 
 ### `HiddenLexers.json`
 
-JSON file to pick which lexers to associate with which extensions, and to associate style and keywords with each lexer.
-(TODO: Long-term goal is to also allow setting Lexilla options, but that's not implemented yet.)
+JSON file to pick which lexers to associate with which extensions, and to associate style and keywords and options with each lexer.
 
 - The `extensions` section needs to be a map of file extension (no dot) to lexer name
     - multiple extensions can point to the same lexer name
@@ -47,7 +46,7 @@ JSON file to pick which lexers to associate with which extensions, and to associ
             - `"fontStyle": "..."`: uses Notepad++'s stylers.xml style integer, so "0" indicates no extra styling, "1" indicates bold, "2" indicates italic, "4" indicates underline, and sums (like "3","5","6","7") indicate combinations (so italic+underline = "2" + "4" = "6").
         - `"keywords": [...]` lists the keywords: the array must contain exactly 9 strings, which are space-separated lists of keywords (similar to what goes in langs.xml)
             - it is up to the user to explore [lexilla/Lexers/*.cxx](https://github.com/notepad-plus-plus/notepad-plus-plus/tree/master/lexilla/lexers) file(s) to determine what keyword list(s) are needed (and eventually, what options are supported) for your enabled hidden lexers.
-        - `"options": {}` is currently empty; TODO: allow option/value pairs inside
+        - `"options": { ... }` is an object of `"optionName": "optionValue"` pairs.
             - it is up to the user to explore [lexilla/Lexers/*.cxx](https://github.com/notepad-plus-plus/notepad-plus-plus/tree/master/lexilla/lexers) file(s) to determine what what options are supported for your enabled hidden lexers.
 
 ```
