@@ -44,6 +44,7 @@ JSON file to pick which lexers to associate with which extensions, and to associ
             - `"fgColor": "..."`: leave empty string to inherit the active Theme's default foreground; otherwise, use a standard RRGGBB hex for the foreground color
             - `"bgColor": "..."`: leave empty string to inherit the active Theme's default background; otherwise, use a standard RRGGBB hex for the background color
             - `"fontStyle": "..."`: uses Notepad++'s stylers.xml style integer, so "0" indicates no extra styling, "1" indicates bold, "2" indicates italic, "4" indicates underline, and sums (like "3","5","6","7") indicate combinations (so italic+underline = "2" + "4" = "6").
+            - `"eolFilled": "0"`: should be "" or "0" or "1".  If "1", will set lexilla to continue styling past the end-of-line (EOL) to the edge of the editor, if the lexer supports that.
         - `"keywords": [...]` lists the keywords: the array must contain exactly 9 strings, which are space-separated lists of keywords (similar to what goes in langs.xml)
             - it is up to the user to explore [lexilla/Lexers/*.cxx](https://github.com/notepad-plus-plus/notepad-plus-plus/tree/master/lexilla/lexers) file(s) to determine what keyword list(s) are needed (and eventually, what options are supported) for your enabled hidden lexers.
         - `"options": { ... }` is an object of `"optionName": "optionValue"` pairs.
@@ -63,12 +64,12 @@ JSON file to pick which lexers to associate with which extensions, and to associ
       "2  SCE_ASCIIDOC_STRONG2":        { "fgColor": "", "bgColor": "", "fontStyle": "5" },
       "3  SCE_ASCIIDOC_EM1":            { "fgColor": "", "bgColor": "", "fontStyle": "2" },
       "4  SCE_ASCIIDOC_EM2":            { "fgColor": "", "bgColor": "", "fontStyle": "6" },
-      "5  SCE_ASCIIDOC_HEADER1":        { "fgColor": "CC0000", "bgColor": "", "fontStyle": "1" },
-      "6  SCE_ASCIIDOC_HEADER2":        { "fgColor": "CC3333", "bgColor": "4F4F4F", "fontStyle": "1" },
-      "7  SCE_ASCIIDOC_HEADER3":        { "fgColor": "CC7777", "bgColor": "5F5F5F", "fontStyle": "1" },
-      "8  SCE_ASCIIDOC_HEADER4":        { "fgColor": "CCbbbb", "bgColor": "6F6F6F", "fontStyle": "1" },
-      "9  SCE_ASCIIDOC_HEADER5":        { "fgColor": "CCffff", "bgColor": "7F7F7F", "fontStyle": "1" },
-      "10 SCE_ASCIIDOC_HEADER6":        { "fgColor": "FFFFFF", "bgColor": "8F8F8F", "fontStyle": "1" },
+      "5  SCE_ASCIIDOC_HEADER1":        { "fgColor": "CC0000", "bgColor": "", "fontStyle": "1", "eolFilled": "1" },
+      "6  SCE_ASCIIDOC_HEADER2":        { "fgColor": "CC3333", "bgColor": "4F4F4F", "fontStyle": "1", "eolFilled": "1" },
+      "7  SCE_ASCIIDOC_HEADER3":        { "fgColor": "CC7777", "bgColor": "5F5F5F", "fontStyle": "1", "eolFilled": "1" },
+      "8  SCE_ASCIIDOC_HEADER4":        { "fgColor": "CCbbbb", "bgColor": "6F6F6F", "fontStyle": "1", "eolFilled": "1" },
+      "9  SCE_ASCIIDOC_HEADER5":        { "fgColor": "CCffff", "bgColor": "7F7F7F", "fontStyle": "1", "eolFilled": "1" },
+      "10 SCE_ASCIIDOC_HEADER6":        { "fgColor": "FFFFFF", "bgColor": "8F8F8F", "fontStyle": "1", "eolFilled": "1" },
       "11 SCE_ASCIIDOC_ULIST_ITEM":     { "fgColor": "0000CC", "bgColor": "", "fontStyle": "0" },
       "12 SCE_ASCIIDOC_OLIST_ITEM":     { "fgColor": "0000CC", "bgColor": "", "fontStyle": "0" },
       "13 SCE_ASCIIDOC_BLOCKQUOTE":     { "fgColor": "00CC00", "bgColor": "", "fontStyle": "0" },

@@ -10,7 +10,8 @@ struct ts_StyleInfo {
 	bool
 		isBold = false,
 		isItalic = false,
-		isUnderline = false;
+		isUnderline = false,
+		isEOLFilled = false;
 };
 typedef std::map <std::string, ts_StyleInfo> t_StylerMap;
 extern ts_StyleInfo lexerInfoNotFound;

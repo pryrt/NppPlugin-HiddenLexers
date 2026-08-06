@@ -138,6 +138,7 @@ void HiddenLexerInterface::set_colors(std::string sLexerName)
         ::SendMessage(_curScintillaHwnd, SCI_STYLESETBOLD, ulStyleID, oStyleInfo.isBold);
         ::SendMessage(_curScintillaHwnd, SCI_STYLESETITALIC, ulStyleID, oStyleInfo.isItalic);
         ::SendMessage(_curScintillaHwnd, SCI_STYLESETUNDERLINE, ulStyleID, oStyleInfo.isUnderline);
+        ::SendMessage(_curScintillaHwnd, SCI_STYLESETEOLFILLED, ulStyleID, oStyleInfo.isEOLFilled);
     }
 }
 

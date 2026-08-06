@@ -46,7 +46,7 @@ std::wstring ConfigFromJson::get_lexer_name(std::wstring /*wsExtension*/)
 }
 
 // return value for lexerInfoNotFound
-ts_StyleInfo lexerInfoNotFound{ "","","",false,false,false };
+ts_StyleInfo lexerInfoNotFound{ "","","0",false,false,false,false};
 
 // return the style info for a given lexer and styleID	; TODO=change return type
 ts_StyleInfo& ConfigFromJson::get_style_info_for_lexer(std::wstring wsLexer, std::wstring wsStyleID)
@@ -79,7 +79,7 @@ bool ConfigFromJson::_cfg_exists_or_created(void)
   },
   "lexers": {
     "stata": {
-      "0" : { "fgColor": "DCDCCC", "bgColor": "3F3F3F", "fontStyle": "0" },
+      "0" : { "fgColor": "DCDCCC", "bgColor": "3F3F3F", "fontStyle": "0", "eolFilled": "0" },
       "1" : { "fgColor": "7F9F7F", "bgColor": "3F3F3F", "fontStyle": "0" },
       "2" : { "fgColor": "7F9F7F", "bgColor": "3F3F3F", "fontStyle": "0" },
       "3" : { "fgColor": "7F9F7F", "bgColor": "3F3F3F", "fontStyle": "0" },
@@ -200,15 +200,21 @@ bool ConfigFromJson::_parse_config_json(void)
                 }
             }
             else {  // actual style
-                ts_StyleInfo thisStyle{ "","","", false, false, false };
+                ts_StyleInfo thisStyle{ "","","0", false, false, false, false};
 
-                for (const auto& styleAttrib: oStyle.items()) {
+                for (const auto& styleAttrib : oStyle.items()) {
                     std::string thisVal;
                     styleAttrib.value().get_to(thisVal);
                     if (styleAttrib.key() == "fgColor")
                         thisStyle.fgColor = thisVal;
                     else if (styleAttrib.key() == "bgColor")
                         thisStyle.bgColor = thisVal;
+                    else if (styleAttrib.key() == "eolFilled") {
+                        if (thisVal == "")
+                            thisVal = "0";
+                        int val = std::stoi(thisVal);
+                        thisStyle.isEOLFilled = val;
+                    }
                     else if (styleAttrib.key() == "fontStyle") {
                         if (thisVal == "")
                             thisVal = "0";
