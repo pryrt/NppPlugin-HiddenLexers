@@ -231,209 +231,209 @@ get out-of-date, and may not be complete, but it gives you a starting place... A
 current [lexilla/Lexers/*.cxx](https://github.com/notepad-plus-plus/notepad-plus-plus/tree/master/lexilla/lexers)
 for the properties in your desired language.
 
-|	Lexer name								|	Option											|
-|-------------------------------------------|-------------------------------------------------|
-|	as, asm									|	lexer.asm.comment.delimiter						|
-|	as, asm									|	fold											|
-|	as, asm									|	fold.asm.syntax.based							|
-|	as, asm									|	fold.asm.comment.multiline						|
-|	as, asm									|	fold.asm.comment.explicit						|
-|	as, asm									|	fold.asm.explicit.start							|
-|	as, asm									|	fold.asm.explicit.end							|
-|	as, asm									|	fold.asm.explicit.anywhere						|
-|	as, asm									|	fold.compact									|
-|	as, asm									|	lexer.as.comment.character						|
-|	baan									|	fold											|
-|	baan									|	fold.comment									|
-|	baan									|	fold.preprocessor								|
-|	baan									|	fold.compact									|
-|	baan									|	fold.baan.syntax.based							|
-|	baan									|	fold.baan.keywords.based						|
-|	baan									|	fold.baan.sections								|
-|	baan									|	fold.baan.inner.level							|
-|	baan									|	lexer.baan.styling.within.preprocessor			|
-|	bash									|	fold											|
-|	bash									|	fold.comment									|
-|	bash									|	fold.compact									|
-|	bash									|	lexer.bash.styling.inside.string				|
-|	bash									|	lexer.bash.styling.inside.backticks				|
-|	bash									|	lexer.bash.styling.inside.parameter				|
-|	bash									|	lexer.bash.styling.inside.heredoc				|
-|	bash									|	lexer.bash.command.substitution					|
-|	bash									|	lexer.bash.nested.backticks						|
-|	bash									|	lexer.bash.special.parameter					|
-|	blitzbasic, purebasic, freebasic		|	fold											|
-|	blitzbasic, purebasic, freebasic		|	fold.basic.syntax.based							|
-|	blitzbasic, purebasic, freebasic		|	fold.basic.comment.explicit						|
-|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.start						|
-|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.end							|
-|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.anywhere					|
-|	blitzbasic, purebasic, freebasic		|	fold.compact									|
-|	cil										|	fold											|
-|	cil										|	fold.comment									|
-|	cil										|	fold.cil.comment.multiline						|
-|	cil										|	fold.compact									|
-|	cpp, cppnocase							|	styling.within.preprocessor						|
-|	cpp, cppnocase							|	lexer.cpp.allow.dollars							|
-|	cpp, cppnocase							|	lexer.cpp.track.preprocessor					|
-|	cpp, cppnocase							|	lexer.cpp.update.preprocessor					|
-|	cpp, cppnocase							|	lexer.cpp.verbatim.strings.allow.escapes		|
-|	cpp, cppnocase							|	lexer.cpp.triplequoted.strings					|
-|	cpp, cppnocase							|	lexer.cpp.hashquoted.strings					|
-|	cpp, cppnocase							|	lexer.cpp.backquoted.strings					|
-|	cpp, cppnocase							|	lexer.cpp.escape.sequence						|
-|	cpp, cppnocase							|	fold											|
-|	cpp, cppnocase							|	fold.cpp.syntax.based							|
-|	cpp, cppnocase							|	fold.comment									|
-|	cpp, cppnocase							|	fold.cpp.comment.multiline						|
-|	cpp, cppnocase							|	fold.cpp.comment.explicit						|
-|	cpp, cppnocase							|	fold.cpp.explicit.start							|
-|	cpp, cppnocase							|	fold.cpp.explicit.end							|
-|	cpp, cppnocase							|	fold.cpp.explicit.anywhere						|
-|	cpp, cppnocase							|	fold.cpp.preprocessor.at.else					|
-|	cpp, cppnocase							|	fold.preprocessor								|
-|	cpp, cppnocase							|	fold.compact									|
-|	cpp, cppnocase							|	fold.at.else									|
-|	d										|	fold											|
-|	d										|	fold.d.syntax.based								|
-|	d										|	fold.comment									|
-|	d										|	fold.d.comment.multiline						|
-|	d										|	fold.d.comment.explicit							|
-|	d										|	fold.d.explicit.start							|
-|	d										|	fold.d.explicit.end								|
-|	d										|	fold.d.explicit.anywhere						|
-|	d										|	fold.compact									|
-|	d										|	lexer.d.fold.at.else							|
-|	d										|	fold.at.else									|
-|	dart									|	fold											|
-|	fsharp									|	fold											|
-|	fsharp									|	fold.compact									|
-|	fsharp									|	fold.comment									|
-|	fsharp									|	fold.fsharp.comment.stream						|
-|	fsharp									|	fold.fsharp.comment.multiline					|
-|	fsharp									|	fold.fsharp.preprocessor						|
-|	fsharp									|	fold.fsharp.imports								|
-|	gdscript								|	lexer.gdscript.whinge.level						|
-|	gdscript								|	lexer.gdscript.literals.binary					|
-|	gdscript								|	lexer.gdscript.strings.over.newline				|
-|	gdscript								|	lexer.gdscript.keywords2.no.sub.identifiers		|
-|	gdscript								|	fold											|
-|	gdscript								|	fold.gdscript.quotes							|
-|	gdscript								|	fold.compact									|
-|	gdscript								|	lexer.gdscript.unicode.identifiers				|
-|	haskell, literatehaskell				|	lexer.haskell.allow.hash						|
-|	haskell, literatehaskell				|	lexer.haskell.allow.quotes						|
-|	haskell, literatehaskell				|	lexer.haskell.allow.questionmark				|
-|	haskell, literatehaskell				|	lexer.haskell.import.safe						|
-|	haskell, literatehaskell				|	lexer.haskell.cpp								|
-|	haskell, literatehaskell				|	styling.within.preprocessor						|
-|	haskell, literatehaskell				|	fold											|
-|	haskell, literatehaskell				|	fold.comment									|
-|	haskell, literatehaskell				|	fold.compact									|
-|	haskell, literatehaskell				|	fold.haskell.imports							|
-|	hollywood								|	fold											|
-|	hollywood								|	fold.compact									|
-|	hypertext, xml, phpscript				|	asp.default.language							|
-|	hypertext, xml, phpscript				|	html.tags.case.sensitive						|
-|	hypertext, xml, phpscript				|	lexer.xml.allow.scripts							|
-|	hypertext, xml, phpscript				|	lexer.xml.allow.php								|
-|	hypertext, xml, phpscript				|	lexer.html.allow.php							|
-|	hypertext, xml, phpscript				|	lexer.html.mako									|
-|	hypertext, xml, phpscript				|	lexer.html.django								|
-|	hypertext, xml, phpscript				|	lexer.xml.allow.asp								|
-|	hypertext, xml, phpscript				|	lexer.html.allow.asp							|
-|	hypertext, xml, phpscript				|	fold											|
-|	hypertext, xml, phpscript				|	fold.html										|
-|	hypertext, xml, phpscript				|	fold.html.preprocessor							|
-|	hypertext, xml, phpscript				|	fold.compact									|
-|	hypertext, xml, phpscript				|	fold.hypertext.comment							|
-|	hypertext, xml, phpscript				|	fold.hypertext.heredoc							|
-|	hypertext, xml, phpscript				|	fold.xml.at.tag.open							|
-|	json									|	lexer.json.escape.sequence						|
-|	json									|	lexer.json.allow.comments						|
-|	json									|	fold.compact									|
-|	json									|	fold											|
-|	julia									|	fold											|
-|	julia									|	fold.compact									|
-|	julia									|	fold.comment									|
-|	julia									|	fold.julia.docstring							|
-|	julia									|	fold.julia.syntax.based							|
-|	julia									|	lexer.julia.highlight.typeannotation			|
-|	julia									|	lexer.julia.highlight.lexerror					|
-|	lua										|	fold.compact									|
-|	nim										|	lexer.nim.raw.strings.highlight.ident			|
-|	nim										|	fold											|
-|	nim										|	fold.compact									|
-|	nix										|	fold											|
-|	perl									|	fold											|
-|	perl									|	fold.comment									|
-|	perl									|	fold.compact									|
-|	perl									|	fold.perl.pod									|
-|	perl									|	fold.perl.package								|
-|	perl									|	fold.perl.comment.explicit						|
-|	perl									|	fold.perl.at.else								|
-|	abl										|	fold											|
-|	abl										|	fold.abl.syntax.based							|
-|	abl										|	fold.comment									|
-|	abl										|	fold.abl.comment.multiline						|
-|	abl										|	fold.compact									|
-|	python									|	tab.timmy.whinge.level							|
-|	python									|	lexer.python.literals.binary					|
-|	python									|	lexer.python.strings.u							|
-|	python									|	lexer.python.strings.b							|
-|	python									|	lexer.python.strings.f							|
-|	python									|	lexer.python.strings.f.pep.701					|
-|	python									|	lexer.python.strings.t							|
-|	python									|	lexer.python.strings.over.newline				|
-|	python									|	lexer.python.keywords2.no.sub.identifiers		|
-|	python									|	fold											|
-|	python									|	fold.quotes.python								|
-|	python									|	fold.compact									|
-|	python									|	lexer.python.unicode.identifiers				|
-|	python									|	lexer.python.identifier.attributes				|
-|	python									|	lexer.python.decorator.attributes				|
-|	raku									|	fold											|
-|	raku									|	fold.comment									|
-|	raku									|	fold.compact									|
-|	raku									|	fold.raku.comment.multiline						|
-|	raku									|	fold.raku.comment.pod							|
-|	registry								|	fold.compact									|
-|	registry								|	fold											|
-|	ruby									|	fold.compact									|
-|	ruby									|	fold.comment									|
-|	rust									|	fold											|
-|	rust									|	fold.comment									|
-|	rust									|	fold.compact									|
-|	rust									|	fold.at.else									|
-|	rust									|	fold.rust.syntax.based							|
-|	rust									|	fold.rust.comment.multiline						|
-|	rust									|	fold.rust.comment.explicit						|
-|	rust									|	fold.rust.explicit.start						|
-|	rust									|	fold.rust.explicit.end							|
-|	rust									|	fold.rust.explicit.anywhere						|
-|	rust									|	lexer.rust.fold.at.else							|
-|	sql										|	fold											|
-|	sql										|	fold.sql.at.else								|
-|	sql										|	fold.comment									|
-|	sql										|	fold.compact									|
-|	sql										|	fold.sql.only.begin								|
-|	sql										|	lexer.sql.backticks.identifier					|
-|	sql										|	lexer.sql.numbersign.comment					|
-|	sql										|	sql.backslash.escapes							|
-|	sql										|	lexer.sql.allow.dotted.word						|
-|	vb, vbscript							|	fold											|
-|	vb, vbscript							|	lexer.vb.strings.multiline						|
-|	verilog									|	fold.comment									|
-|	verilog									|	fold.preprocessor								|
-|	verilog									|	fold.compact									|
-|	verilog									|	fold.at.else									|
-|	verilog									|	fold.verilog.flags								|
-|	verilog									|	lexer.verilog.track.preprocessor				|
-|	verilog									|	lexer.verilog.update.preprocessor				|
-|	verilog									|	lexer.verilog.portstyling						|
-|	verilog									|	lexer.verilog.allupperkeywords					|
-|	verilog									|	lexer.verilog.fold.preprocessor.else			|
-|	visualprolog							|	lexer.visualprolog.verbatim.strings				|
-|	visualprolog							|	lexer.visualprolog.backquoted.strings			|
-|	zig										|	fold											|
+|	Lexer name								|	Option											|	Description from [SciTEDoc](https://scintilla.org/SciTEDoc.html#property-xml.auto.close.tags)	|
+|-------------------------------------------|-------------------------------------------------|-------------------------------------------------|
+|	as, asm									|	lexer.asm.comment.delimiter						|	Character used for COMMENT directive's delimiter, replacing the standard "~".	|
+|	as, asm									|	fold											|	Folding is turned on by setting fold=1.	|
+|	as, asm									|	fold.asm.syntax.based							|	Set this property to 0 to disable syntax based folding.	|
+|	as, asm									|	fold.asm.comment.multiline						|	Set this property to 1 to enable folding multi-line comments.	|
+|	as, asm									|	fold.asm.comment.explicit						|	This option enables folding explicit fold points when using the Asm lexer. Explicit fold points allows adding extra folding by placing a ;{ comment at the start and a ;} at the end of a section that should fold.	|
+|	as, asm									|	fold.asm.explicit.start							|	The string to use for explicit fold start points, replacing the standard ;{.	|
+|	as, asm									|	fold.asm.explicit.end							|	The string to use for explicit fold end points, replacing the standard ;}.	|
+|	as, asm									|	fold.asm.explicit.anywhere						|	Set this property to 1 to enable explicit fold points anywhere, not just in line comments.	|
+|	as, asm									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	as, asm									|	lexer.as.comment.character						|	Overrides the default comment character (which is ';' for asm and '#' for as).	|
+|	baan									|	fold											|	Folding is turned on by setting fold=1.	|
+|	baan									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	baan									|	fold.preprocessor								|	This option enables folding preprocessor directives when using the C++ lexer. Includes C#'s explicit #region and #endregion folding directives.	|
+|	baan									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	baan									|	fold.baan.syntax.based							|	Set this property to 0 to disable syntax based folding, which is folding based on '{' &amp; '('.	|
+|	baan									|	fold.baan.keywords.based						|	Set this property to 0 to disable keywords based folding, which is folding based on for, if, on (case), repeat, select, while and fold ends based on endfor, endif, endcase, until, endselect, endwhile respectively.Also folds declarations which are grouped together.	|
+|	baan									|	fold.baan.sections								|	Set this property to 0 to disable folding of Main Sections as well as Sub Sections.	|
+|	baan									|	fold.baan.inner.level							|	Set this property to 1 to enable folding of inner levels of select statements.Disabled by default. case and if statements are also eligible	|
+|	baan									|	lexer.baan.styling.within.preprocessor			|	For Baan code, determines whether all preprocessor code is styled in the preprocessor style (0, the default) or only from the initial # to the end of the command word(1).	|
+|	bash									|	fold											|	Folding is turned on by setting fold=1.	|
+|	bash									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	bash									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	bash									|	lexer.bash.styling.inside.string				|	Set this property to 1 to highlight shell expansions inside string.	|
+|	bash									|	lexer.bash.styling.inside.backticks				|	Set this property to 1 to highlight shell expansions inside backticks.	|
+|	bash									|	lexer.bash.styling.inside.parameter				|	Set this property to 1 to highlight shell expansions inside ${} parameter expansion.	|
+|	bash									|	lexer.bash.styling.inside.heredoc				|	Set this property to 1 to highlight shell expansions inside here document.	|
+|	bash									|	lexer.bash.command.substitution					|	Set how to highlight $() command substitution. 0 (the default) highlighted as backticks. 1 highlighted inside. 2 highlighted inside with extra scope tracking.	|
+|	bash									|	lexer.bash.nested.backticks						|	Set this property to 0 to disable nested backquoted command substitution.	|
+|	bash									|	lexer.bash.special.parameter					|	Set shell (default is Bash) special parameters.	|
+|	blitzbasic, purebasic, freebasic		|	fold											|	Folding is turned on by setting fold=1.	|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.syntax.based							|	Set this property to 0 to disable syntax based folding.	|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.comment.explicit						|	This option enables folding explicit fold points when using the Basic lexer. Explicit fold points allows adding extra folding by placing a ;{ (BB/PB) or '{ (FB) comment at the start and a ;} (BB/PB) or '} (FB) at the end of a section that should be folded.	|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.start						|	The string to use for explicit fold start points, replacing the standard ;{ (BB/PB) or '{ (FB).	|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.end							|	The string to use for explicit fold end points, replacing the standard ;} (BB/PB) or '} (FB).	|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.anywhere					|	Set this property to 1 to enable explicit fold points anywhere, not just in line comments.	|
+|	blitzbasic, purebasic, freebasic		|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	cil										|	fold											|	Folding is turned on by setting fold=1.	|
+|	cil										|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	cil										|	fold.cil.comment.multiline						|	Set this property to 0 to disable folding multi-line comments when fold.comment=1.	|
+|	cil										|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	cpp, cppnocase							|	styling.within.preprocessor						|	For C++ code, determines whether all preprocessor code is styled in the preprocessor style (0, the default) or only from the initial # to the end of the command word(1).	|
+|	cpp, cppnocase							|	lexer.cpp.allow.dollars							|	Set to 0 to disallow the '$' character in identifiers with the cpp lexer.	|
+|	cpp, cppnocase							|	lexer.cpp.track.preprocessor					|	Set to 1 to interpret #if/#else/#endif to grey out code that is not active.	|
+|	cpp, cppnocase							|	lexer.cpp.update.preprocessor					|	Set to 1 to update preprocessor definitions when #define found.	|
+|	cpp, cppnocase							|	lexer.cpp.verbatim.strings.allow.escapes		|	Set to 1 to allow verbatim strings to contain escape sequences.	|
+|	cpp, cppnocase							|	lexer.cpp.triplequoted.strings					|	Set to 1 to enable highlighting of triple-quoted strings.	|
+|	cpp, cppnocase							|	lexer.cpp.hashquoted.strings					|	Set to 1 to enable highlighting of hash-quoted strings.	|
+|	cpp, cppnocase							|	lexer.cpp.backquoted.strings					|	Set how to highlighting back-quoted strings. 0 (the default) no highlighting. 1 highlighted as Go raw string. 2 highlighted as JavaScript template literal.	|
+|	cpp, cppnocase							|	lexer.cpp.escape.sequence						|	Set to 1 to enable highlighting of escape sequences in strings	|
+|	cpp, cppnocase							|	fold											|	Folding is turned on by setting fold=1.	|
+|	cpp, cppnocase							|	fold.cpp.syntax.based							|	Set this property to 0 to disable syntax based folding.	|
+|	cpp, cppnocase							|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	cpp, cppnocase							|	fold.cpp.comment.multiline						|	Set this property to 0 to disable folding multi-line comments when fold.comment=1.	|
+|	cpp, cppnocase							|	fold.cpp.comment.explicit						|	Set this property to 0 to disable folding explicit fold points when fold.comment=1.	|
+|	cpp, cppnocase							|	fold.cpp.explicit.start							|	The string to use for explicit fold start points, replacing the standard //{.	|
+|	cpp, cppnocase							|	fold.cpp.explicit.end							|	The string to use for explicit fold end points, replacing the standard //}.	|
+|	cpp, cppnocase							|	fold.cpp.explicit.anywhere						|	Set this property to 1 to enable explicit fold points anywhere, not just in line comments.	|
+|	cpp, cppnocase							|	fold.cpp.preprocessor.at.else					|	This option enables folding on a preprocessor #else or #endif line of an #if statement.	|
+|	cpp, cppnocase							|	fold.preprocessor								|	This option enables folding preprocessor directives when using the C++ lexer. Includes C#'s explicit #region and #endregion folding directives.	|
+|	cpp, cppnocase							|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	cpp, cppnocase							|	fold.at.else									|	This option enables C++ folding on a "} else {" line of an if statement.	|
+|	d										|	fold											|	Folding is turned on by setting fold=1.	|
+|	d										|	fold.d.syntax.based								|	Set this property to 0 to disable syntax based folding.	|
+|	d										|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	d										|	fold.d.comment.multiline						|	Set this property to 0 to disable folding multi-line comments when fold.comment=1.	|
+|	d										|	fold.d.comment.explicit							|	Set this property to 0 to disable folding explicit fold points when fold.comment=1.	|
+|	d										|	fold.d.explicit.start							|	The string to use for explicit fold start points, replacing the standard //{.	|
+|	d										|	fold.d.explicit.end								|	The string to use for explicit fold end points, replacing the standard //}.	|
+|	d										|	fold.d.explicit.anywhere						|	Set this property to 1 to enable explicit fold points anywhere, not just in line comments.	|
+|	d										|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	d										|	lexer.d.fold.at.else							|	This option enables D folding on a "} else {" line of an if statement.	|
+|	d										|	fold.at.else									|	This option enables C++ folding on a "} else {" line of an if statement.	|
+|	dart									|	fold											|	Folding is turned on by setting fold=1.	|
+|	fsharp									|	fold											|	Folding is turned on by setting fold=1.	|
+|	fsharp									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	fsharp									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	fsharp									|	fold.fsharp.comment.stream						|	Setting this option to 0 disables folding of ML-style comments in F# files when fold.comment=1.	|
+|	fsharp									|	fold.fsharp.comment.multiline					|	Setting this option to 0 disables folding of grouped line comments in F# files when fold.comment=1.	|
+|	fsharp									|	fold.fsharp.preprocessor						|	Setting this option to 1 enables folding of F# compiler directives.	|
+|	fsharp									|	fold.fsharp.imports								|	Setting this option to 0 disables folding of F# import declarations.	|
+|	gdscript								|	lexer.gdscript.whinge.level						|	For GDScript code, checks whether indenting is consistent. The default, 0 turns off indentation checking, 1 checks whether each line is potentially inconsistent with the previous line, 2 checks whether any space characters occur before a tab character in the indentation, 3 checks whether any spaces are in the indentation, and 4 checks for any tab characters in the indentation. 1 is a good level to use.	|
+|	gdscript								|	lexer.gdscript.literals.binary					|	Set to 0 to not recognise binary and octal literals: 0b1011 0o712.	|
+|	gdscript								|	lexer.gdscript.strings.over.newline				|	Set to 1 to allow strings to span newline characters.	|
+|	gdscript								|	lexer.gdscript.keywords2.no.sub.identifiers		|	When enabled, it will not style keywords2 items that are used as a sub-identifier. Example: when set, will not highlight "foo.open" when "open" is a keywords2 item.	|
+|	gdscript								|	fold											|	Folding is turned on by setting fold=1.	|
+|	gdscript								|	fold.gdscript.quotes							|	This option enables folding multi-line quoted strings when using the GDScript lexer.	|
+|	gdscript								|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	gdscript								|	lexer.gdscript.unicode.identifiers				|	Set to 0 to not recognise Unicode identifiers.	|
+|	haskell, literatehaskell				|	lexer.haskell.allow.hash						|	Set to 0 to disallow the '#' character at the end of identifiers and literals with the haskell lexer (GHC -XMagicHash extension)	|
+|	haskell, literatehaskell				|	lexer.haskell.allow.quotes						|	Set to 0 to disable highlighting of Template Haskell name quotations and promoted constructors (GHC -XTemplateHaskell and -XDataKinds extensions)	|
+|	haskell, literatehaskell				|	lexer.haskell.allow.questionmark				|	Set to 1 to allow the '?' character at the start of identifiers with the haskell lexer (GHC &amp; Hugs -XImplicitParams extension)	|
+|	haskell, literatehaskell				|	lexer.haskell.import.safe						|	Set to 0 to disallow "safe" keyword in imports (GHC -XSafe, -XTrustworthy, -XUnsafe extensions)	|
+|	haskell, literatehaskell				|	lexer.haskell.cpp								|	Set to 0 to disable C-preprocessor highlighting (-XCPP extension)	|
+|	haskell, literatehaskell				|	styling.within.preprocessor						|	For C++ code, determines whether all preprocessor code is styled in the preprocessor style (0, the default) or only from the initial # to the end of the command word(1).	|
+|	haskell, literatehaskell				|	fold											|	Folding is turned on by setting fold=1.	|
+|	haskell, literatehaskell				|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	haskell, literatehaskell				|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	haskell, literatehaskell				|	fold.haskell.imports							|	Set to 1 to enable folding of import declarations	|
+|	hollywood								|	fold											|	Folding is turned on by setting fold=1.	|
+|	hollywood								|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	hypertext, xml, phpscript				|	asp.default.language							|	Script in ASP code is initially assumed to be in JavaScript. To change this to VBScript set asp.default.language to 2. Python is 3.	|
+|	hypertext, xml, phpscript				|	html.tags.case.sensitive						|	For XML and HTML, setting this property to 1 will make tags match in a case sensitive way which is the expected behaviour for XML and XHTML.	|
+|	hypertext, xml, phpscript				|	lexer.xml.allow.scripts							|	Set to 0 to disable scripts in XML.	|
+|	hypertext, xml, phpscript				|	lexer.xml.allow.php								|	Set to 0 to disable PHP in XML, 1 to accept &lt;?php and &lt;?=, 2 to also accept &lt;?.The default is 2.	|
+|	hypertext, xml, phpscript				|	lexer.html.allow.php							|	Set to 0 to disable PHP in HTML, 1 to accept &lt;?php and &lt;?=, 2 to also accept &lt;?.The default is 2.	|
+|	hypertext, xml, phpscript				|	lexer.html.mako									|	Set to 1 to enable the mako template language.	|
+|	hypertext, xml, phpscript				|	lexer.html.django								|	Set to 1 to enable the django template language.	|
+|	hypertext, xml, phpscript				|	lexer.xml.allow.asp								|	Set to 0 to disable ASP in XML.	|
+|	hypertext, xml, phpscript				|	lexer.html.allow.asp							|	Set to 0 to disable ASP in HTML.	|
+|	hypertext, xml, phpscript				|	fold											|	Folding is turned on by setting fold=1.	|
+|	hypertext, xml, phpscript				|	fold.html										|	Folding is turned on or off for HTML and XML files with this option. The fold option must also be on for folding to occur.	|
+|	hypertext, xml, phpscript				|	fold.html.preprocessor							|	Folding is turned on or off for scripts embedded in HTML files with this option. The default is on.	|
+|	hypertext, xml, phpscript				|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	hypertext, xml, phpscript				|	fold.hypertext.comment							|	Allow folding for comments in scripts embedded in HTML. The default is off.	|
+|	hypertext, xml, phpscript				|	fold.hypertext.heredoc							|	Allow folding for heredocs in scripts embedded in HTML. The default is off.	|
+|	hypertext, xml, phpscript				|	fold.xml.at.tag.open							|	Enable folding for XML at the start of open tag. The default is off.	|
+|	json									|	lexer.json.escape.sequence						|	Set to 1 to enable highlighting of escape sequences in strings	|
+|	json									|	lexer.json.allow.comments						|	Set to 1 to enable highlighting of line/block comments in JSON	|
+|	json									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	json									|	fold											|	Folding is turned on by setting fold=1.	|
+|	julia									|	fold											|	Folding is turned on by setting fold=1.	|
+|	julia									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	julia									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	julia									|	fold.julia.docstring							|	Fold multiline triple-doublequote strings, usually used to document a function or type above the definition.	|
+|	julia									|	fold.julia.syntax.based							|	Set this property to 0 to disable syntax based folding.	|
+|	julia									|	lexer.julia.highlight.typeannotation			|	This option enables highlighting of the type identifier after `::`.	|
+|	julia									|	lexer.julia.highlight.lexerror					|	This option enables highlighting of syntax error int character or number definition.	|
+|	lua										|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	nim										|	lexer.nim.raw.strings.highlight.ident			|	Set to 1 to enable highlighting generalized raw string identifiers. Generalized raw string identifiers are anything other than r (or R).	|
+|	nim										|	fold											|	Folding is turned on by setting fold=1.	|
+|	nim										|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	nix										|	fold											|	Folding is turned on by setting fold=1.	|
+|	perl									|	fold											|	Folding is turned on by setting fold=1.	|
+|	perl									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	perl									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	perl									|	fold.perl.pod									|	Set to 0 to disable folding Pod blocks when using the Perl lexer.	|
+|	perl									|	fold.perl.package								|	Set to 0 to disable folding packages when using the Perl lexer.	|
+|	perl									|	fold.perl.comment.explicit						|	Set to 0 to disable explicit folding.	|
+|	perl									|	fold.perl.at.else								|	This option enables Perl folding on a "} else {" line of an if statement.	|
+|	abl										|	fold											|	Folding is turned on by setting fold=1.	|
+|	abl										|	fold.abl.syntax.based							|	Set this property to 0 to disable syntax based folding.	|
+|	abl										|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	abl										|	fold.abl.comment.multiline						|	Set this property to 0 to disable folding multi-line comments when fold.comment=1.	|
+|	abl										|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	python									|	tab.timmy.whinge.level							|	For Python code, checks whether indenting is consistent. The default, 0 turns off indentation checking, 1 checks whether each line is potentially inconsistent with the previous line, 2 checks whether any space characters occur before a tab character in the indentation, 3 checks whether any spaces are in the indentation, and 4 checks for any tab characters in the indentation. 1 is a good level to use.	|
+|	python									|	lexer.python.literals.binary					|	Set to 0 to not recognise Python 3 binary and octal literals: 0b1011 0o712.	|
+|	python									|	lexer.python.strings.u							|	Set to 0 to not recognise Python Unicode literals u"x" as used before Python 3.	|
+|	python									|	lexer.python.strings.b							|	Set to 0 to not recognise Python 3 bytes literals b"x".	|
+|	python									|	lexer.python.strings.f							|	Set to 0 to not recognise Python 3.6 f-string literals f"var={var}".	|
+|	python									|	lexer.python.strings.f.pep.701					|	Set to 0 to use pre-PEP 701 / Python 3.12 f-string lexing.	|
+|	python									|	lexer.python.strings.t							|	Set to 0 to not recognise Python 3.14 t-string literals t"var={var}".	|
+|	python									|	lexer.python.strings.over.newline				|	Set to 1 to allow strings to span newline characters.	|
+|	python									|	lexer.python.keywords2.no.sub.identifiers		|	When enabled, it will not style keywords2 items that are used as a sub-identifier. Example: when set, will not highlight "foo.open" when "open" is a keywords2 item.	|
+|	python									|	fold											|	Folding is turned on by setting fold=1.	|
+|	python									|	fold.quotes.python								|	This option enables folding multi-line quoted strings when using the Python lexer.	|
+|	python									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	python									|	lexer.python.unicode.identifiers				|	Set to 0 to not recognise Python 3 Unicode identifiers.	|
+|	python									|	lexer.python.identifier.attributes				|	Set to 1 to recognise Python identifier attributes.	|
+|	python									|	lexer.python.decorator.attributes				|	Set to 1 to recognise Python decorator attributes.	|
+|	raku									|	fold											|	Folding is turned on by setting fold=1.	|
+|	raku									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	raku									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	raku									|	fold.raku.comment.multiline						|	Set this property to 0 to disable folding multi-line comments when fold.comment=1.	|
+|	raku									|	fold.raku.comment.pod							|	Set this property to 0 to disable folding POD comments when fold.comment=1.	|
+|	registry								|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	registry								|	fold											|	Folding is turned on by setting fold=1.	|
+|	ruby									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	ruby									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	rust									|	fold											|	Folding is turned on by setting fold=1.	|
+|	rust									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	rust									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	rust									|	fold.at.else									|	This option enables C++ folding on a "} else {" line of an if statement.	|
+|	rust									|	fold.rust.syntax.based							|	Set this property to 0 to disable syntax based folding.	|
+|	rust									|	fold.rust.comment.multiline						|	Set this property to 0 to disable folding multi-line comments when fold.comment=1.	|
+|	rust									|	fold.rust.comment.explicit						|	Set this property to 0 to disable folding explicit fold points when fold.comment=1.	|
+|	rust									|	fold.rust.explicit.start						|	The string to use for explicit fold start points, replacing the standard //{.	|
+|	rust									|	fold.rust.explicit.end							|	The string to use for explicit fold end points, replacing the standard //}.	|
+|	rust									|	fold.rust.explicit.anywhere						|	Set this property to 1 to enable explicit fold points anywhere, not just in line comments.	|
+|	rust									|	lexer.rust.fold.at.else							|	This option enables Rust folding on a "} else {" line of an if statement.	|
+|	sql										|	fold											|	Folding is turned on by setting fold=1.	|
+|	sql										|	fold.sql.at.else								|	This option enables SQL folding on a "ELSE" and "ELSIF" line of an IF statement.	|
+|	sql										|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	sql										|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	sql										|	fold.sql.only.begin								|	Set to 1 to only fold on 'begin' but not other keywords.	|
+|	sql										|	lexer.sql.backticks.identifier					|	Recognise backtick quoting of identifiers.	|
+|	sql										|	lexer.sql.numbersign.comment					|	If "lexer.sql.numbersign.comment" property is set to 0 a line beginning with '#' will not be a comment.	|
+|	sql										|	sql.backslash.escapes							|	Enables backslash as an escape character in SQL.	|
+|	sql										|	lexer.sql.allow.dotted.word						|	Set to 1 to colourise recognized words with dots (recommended for Oracle PL/SQL objects).	|
+|	vb, vbscript							|	fold											|	Folding is turned on by setting fold=1.	|
+|	vb, vbscript							|	lexer.vb.strings.multiline						|	Set to 1 to allow strings to continue over line ends.	|
+|	verilog									|	fold.comment									|	This option enables folding multi-line comments and explicit fold points when using the C++ lexer. Explicit fold points allows adding extra folding by placing a //{ comment at the start and a //} at the end of a section that should fold.	|
+|	verilog									|	fold.preprocessor								|	This option enables folding preprocessor directives when using the C++ lexer. Includes C#'s explicit #region and #endregion folding directives.	|
+|	verilog									|	fold.compact									|	Folding is turned on by setting fold=1.	|
+|	verilog									|	fold.at.else									|	This option enables C++ folding on a "} else {" line of an if statement.	|
+|	verilog									|	fold.verilog.flags								|	This option enables folding module definitions. Typically source files contain only one module definition so this option is somewhat useless.	|
+|	verilog									|	lexer.verilog.track.preprocessor				|	Set to 1 to interpret `if/`else/`endif to grey out code that is not active.	|
+|	verilog									|	lexer.verilog.update.preprocessor				|	Set to 1 to update preprocessor definitions when `define, `undef, or `undefineall found.	|
+|	verilog									|	lexer.verilog.portstyling						|	Set to 1 to style input, output, and inout ports differently from regular keywords.	|
+|	verilog									|	lexer.verilog.allupperkeywords					|	Set to 1 to style identifiers that are all uppercase as documentation keyword.	|
+|	verilog									|	lexer.verilog.fold.preprocessor.else			|	This option enables folding on `else and `elsif preprocessor directives.	|
+|	visualprolog							|	lexer.visualprolog.verbatim.strings				|	Set to 0 to disable highlighting verbatim strings using '@'.	|
+|	visualprolog							|	lexer.visualprolog.backquoted.strings			|	Set to 1 to enable using back quotes (``) to delimit strings.	|
+|	zig										|	fold											|	Folding is turned on by setting fold=1.	|
 
