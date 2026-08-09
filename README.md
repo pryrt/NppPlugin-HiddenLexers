@@ -223,3 +223,217 @@ JSON file to pick which lexers to associate with which extensions, and to associ
   }
 }
 ```
+
+### Known Properties
+
+These are properties that I could easily extract from the source code... this list will likely
+get out-of-date, and may not be complete, but it gives you a starting place... Always check the
+current [lexilla/Lexers/*.cxx](https://github.com/notepad-plus-plus/notepad-plus-plus/tree/master/lexilla/lexers)
+for the properties in your desired language.
+
+|	Lexer name								|	Option											|
+|-------------------------------------------|-------------------------------------------------|
+|	as, asm									|	lexer.asm.comment.delimiter						|
+|	as, asm									|	fold											|
+|	as, asm									|	fold.asm.syntax.based							|
+|	as, asm									|	fold.asm.comment.multiline						|
+|	as, asm									|	fold.asm.comment.explicit						|
+|	as, asm									|	fold.asm.explicit.start							|
+|	as, asm									|	fold.asm.explicit.end							|
+|	as, asm									|	fold.asm.explicit.anywhere						|
+|	as, asm									|	fold.compact									|
+|	as, asm									|	lexer.as.comment.character						|
+|	baan									|	fold											|
+|	baan									|	fold.comment									|
+|	baan									|	fold.preprocessor								|
+|	baan									|	fold.compact									|
+|	baan									|	fold.baan.syntax.based							|
+|	baan									|	fold.baan.keywords.based						|
+|	baan									|	fold.baan.sections								|
+|	baan									|	fold.baan.inner.level							|
+|	baan									|	lexer.baan.styling.within.preprocessor			|
+|	bash									|	fold											|
+|	bash									|	fold.comment									|
+|	bash									|	fold.compact									|
+|	bash									|	lexer.bash.styling.inside.string				|
+|	bash									|	lexer.bash.styling.inside.backticks				|
+|	bash									|	lexer.bash.styling.inside.parameter				|
+|	bash									|	lexer.bash.styling.inside.heredoc				|
+|	bash									|	lexer.bash.command.substitution					|
+|	bash									|	lexer.bash.nested.backticks						|
+|	bash									|	lexer.bash.special.parameter					|
+|	blitzbasic, purebasic, freebasic		|	fold											|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.syntax.based							|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.comment.explicit						|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.start						|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.end							|
+|	blitzbasic, purebasic, freebasic		|	fold.basic.explicit.anywhere					|
+|	blitzbasic, purebasic, freebasic		|	fold.compact									|
+|	cil										|	fold											|
+|	cil										|	fold.comment									|
+|	cil										|	fold.cil.comment.multiline						|
+|	cil										|	fold.compact									|
+|	cpp, cppnocase							|	styling.within.preprocessor						|
+|	cpp, cppnocase							|	lexer.cpp.allow.dollars							|
+|	cpp, cppnocase							|	lexer.cpp.track.preprocessor					|
+|	cpp, cppnocase							|	lexer.cpp.update.preprocessor					|
+|	cpp, cppnocase							|	lexer.cpp.verbatim.strings.allow.escapes		|
+|	cpp, cppnocase							|	lexer.cpp.triplequoted.strings					|
+|	cpp, cppnocase							|	lexer.cpp.hashquoted.strings					|
+|	cpp, cppnocase							|	lexer.cpp.backquoted.strings					|
+|	cpp, cppnocase							|	lexer.cpp.escape.sequence						|
+|	cpp, cppnocase							|	fold											|
+|	cpp, cppnocase							|	fold.cpp.syntax.based							|
+|	cpp, cppnocase							|	fold.comment									|
+|	cpp, cppnocase							|	fold.cpp.comment.multiline						|
+|	cpp, cppnocase							|	fold.cpp.comment.explicit						|
+|	cpp, cppnocase							|	fold.cpp.explicit.start							|
+|	cpp, cppnocase							|	fold.cpp.explicit.end							|
+|	cpp, cppnocase							|	fold.cpp.explicit.anywhere						|
+|	cpp, cppnocase							|	fold.cpp.preprocessor.at.else					|
+|	cpp, cppnocase							|	fold.preprocessor								|
+|	cpp, cppnocase							|	fold.compact									|
+|	cpp, cppnocase							|	fold.at.else									|
+|	d										|	fold											|
+|	d										|	fold.d.syntax.based								|
+|	d										|	fold.comment									|
+|	d										|	fold.d.comment.multiline						|
+|	d										|	fold.d.comment.explicit							|
+|	d										|	fold.d.explicit.start							|
+|	d										|	fold.d.explicit.end								|
+|	d										|	fold.d.explicit.anywhere						|
+|	d										|	fold.compact									|
+|	d										|	lexer.d.fold.at.else							|
+|	d										|	fold.at.else									|
+|	dart									|	fold											|
+|	fsharp									|	fold											|
+|	fsharp									|	fold.compact									|
+|	fsharp									|	fold.comment									|
+|	fsharp									|	fold.fsharp.comment.stream						|
+|	fsharp									|	fold.fsharp.comment.multiline					|
+|	fsharp									|	fold.fsharp.preprocessor						|
+|	fsharp									|	fold.fsharp.imports								|
+|	gdscript								|	lexer.gdscript.whinge.level						|
+|	gdscript								|	lexer.gdscript.literals.binary					|
+|	gdscript								|	lexer.gdscript.strings.over.newline				|
+|	gdscript								|	lexer.gdscript.keywords2.no.sub.identifiers		|
+|	gdscript								|	fold											|
+|	gdscript								|	fold.gdscript.quotes							|
+|	gdscript								|	fold.compact									|
+|	gdscript								|	lexer.gdscript.unicode.identifiers				|
+|	haskell, literatehaskell				|	lexer.haskell.allow.hash						|
+|	haskell, literatehaskell				|	lexer.haskell.allow.quotes						|
+|	haskell, literatehaskell				|	lexer.haskell.allow.questionmark				|
+|	haskell, literatehaskell				|	lexer.haskell.import.safe						|
+|	haskell, literatehaskell				|	lexer.haskell.cpp								|
+|	haskell, literatehaskell				|	styling.within.preprocessor						|
+|	haskell, literatehaskell				|	fold											|
+|	haskell, literatehaskell				|	fold.comment									|
+|	haskell, literatehaskell				|	fold.compact									|
+|	haskell, literatehaskell				|	fold.haskell.imports							|
+|	hollywood								|	fold											|
+|	hollywood								|	fold.compact									|
+|	hypertext, xml, phpscript				|	asp.default.language							|
+|	hypertext, xml, phpscript				|	html.tags.case.sensitive						|
+|	hypertext, xml, phpscript				|	lexer.xml.allow.scripts							|
+|	hypertext, xml, phpscript				|	lexer.xml.allow.php								|
+|	hypertext, xml, phpscript				|	lexer.html.allow.php							|
+|	hypertext, xml, phpscript				|	lexer.html.mako									|
+|	hypertext, xml, phpscript				|	lexer.html.django								|
+|	hypertext, xml, phpscript				|	lexer.xml.allow.asp								|
+|	hypertext, xml, phpscript				|	lexer.html.allow.asp							|
+|	hypertext, xml, phpscript				|	fold											|
+|	hypertext, xml, phpscript				|	fold.html										|
+|	hypertext, xml, phpscript				|	fold.html.preprocessor							|
+|	hypertext, xml, phpscript				|	fold.compact									|
+|	hypertext, xml, phpscript				|	fold.hypertext.comment							|
+|	hypertext, xml, phpscript				|	fold.hypertext.heredoc							|
+|	hypertext, xml, phpscript				|	fold.xml.at.tag.open							|
+|	json									|	lexer.json.escape.sequence						|
+|	json									|	lexer.json.allow.comments						|
+|	json									|	fold.compact									|
+|	json									|	fold											|
+|	julia									|	fold											|
+|	julia									|	fold.compact									|
+|	julia									|	fold.comment									|
+|	julia									|	fold.julia.docstring							|
+|	julia									|	fold.julia.syntax.based							|
+|	julia									|	lexer.julia.highlight.typeannotation			|
+|	julia									|	lexer.julia.highlight.lexerror					|
+|	lua										|	fold.compact									|
+|	nim										|	lexer.nim.raw.strings.highlight.ident			|
+|	nim										|	fold											|
+|	nim										|	fold.compact									|
+|	nix										|	fold											|
+|	perl									|	fold											|
+|	perl									|	fold.comment									|
+|	perl									|	fold.compact									|
+|	perl									|	fold.perl.pod									|
+|	perl									|	fold.perl.package								|
+|	perl									|	fold.perl.comment.explicit						|
+|	perl									|	fold.perl.at.else								|
+|	abl										|	fold											|
+|	abl										|	fold.abl.syntax.based							|
+|	abl										|	fold.comment									|
+|	abl										|	fold.abl.comment.multiline						|
+|	abl										|	fold.compact									|
+|	python									|	tab.timmy.whinge.level							|
+|	python									|	lexer.python.literals.binary					|
+|	python									|	lexer.python.strings.u							|
+|	python									|	lexer.python.strings.b							|
+|	python									|	lexer.python.strings.f							|
+|	python									|	lexer.python.strings.f.pep.701					|
+|	python									|	lexer.python.strings.t							|
+|	python									|	lexer.python.strings.over.newline				|
+|	python									|	lexer.python.keywords2.no.sub.identifiers		|
+|	python									|	fold											|
+|	python									|	fold.quotes.python								|
+|	python									|	fold.compact									|
+|	python									|	lexer.python.unicode.identifiers				|
+|	python									|	lexer.python.identifier.attributes				|
+|	python									|	lexer.python.decorator.attributes				|
+|	raku									|	fold											|
+|	raku									|	fold.comment									|
+|	raku									|	fold.compact									|
+|	raku									|	fold.raku.comment.multiline						|
+|	raku									|	fold.raku.comment.pod							|
+|	registry								|	fold.compact									|
+|	registry								|	fold											|
+|	ruby									|	fold.compact									|
+|	ruby									|	fold.comment									|
+|	rust									|	fold											|
+|	rust									|	fold.comment									|
+|	rust									|	fold.compact									|
+|	rust									|	fold.at.else									|
+|	rust									|	fold.rust.syntax.based							|
+|	rust									|	fold.rust.comment.multiline						|
+|	rust									|	fold.rust.comment.explicit						|
+|	rust									|	fold.rust.explicit.start						|
+|	rust									|	fold.rust.explicit.end							|
+|	rust									|	fold.rust.explicit.anywhere						|
+|	rust									|	lexer.rust.fold.at.else							|
+|	sql										|	fold											|
+|	sql										|	fold.sql.at.else								|
+|	sql										|	fold.comment									|
+|	sql										|	fold.compact									|
+|	sql										|	fold.sql.only.begin								|
+|	sql										|	lexer.sql.backticks.identifier					|
+|	sql										|	lexer.sql.numbersign.comment					|
+|	sql										|	sql.backslash.escapes							|
+|	sql										|	lexer.sql.allow.dotted.word						|
+|	vb, vbscript							|	fold											|
+|	vb, vbscript							|	lexer.vb.strings.multiline						|
+|	verilog									|	fold.comment									|
+|	verilog									|	fold.preprocessor								|
+|	verilog									|	fold.compact									|
+|	verilog									|	fold.at.else									|
+|	verilog									|	fold.verilog.flags								|
+|	verilog									|	lexer.verilog.track.preprocessor				|
+|	verilog									|	lexer.verilog.update.preprocessor				|
+|	verilog									|	lexer.verilog.portstyling						|
+|	verilog									|	lexer.verilog.allupperkeywords					|
+|	verilog									|	lexer.verilog.fold.preprocessor.else			|
+|	visualprolog							|	lexer.visualprolog.verbatim.strings				|
+|	visualprolog							|	lexer.visualprolog.backquoted.strings			|
+|	zig										|	fold											|
+
