@@ -17,14 +17,14 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#define VERSION_NUM				1,0,0,0
-#define VERSION_LINEAR			100
+#define VERSION_NUM				0,0,2,0
+#define VERSION_LINEAR			002
 #define VERSION_LINEAR_TEXT		TEXT(VERSION_LINEAR)
-#define VERSION_STRING			"1.0.0.0"
+#define VERSION_STRING			"0.0.2.0"
 //								// VERSION_TEXT This must match the tag pushed on the server minus the "v"
 #define VERSION_TEXT			TEXT(VERSION_STRING)
 //								// VERSION_STAGE				// "-alpha", "-beta", "-dev", ""
-#define VERSION_STAGE			""
+#define VERSION_STAGE			"-beta"
 #define VERSION_STAGE_WS		TEXT(VERSION_STAGE)
 #define VERSION_NAME			"HiddenLexers"
 #define VERSION_NAME_WS			TEXT(VERSION_NAME)
