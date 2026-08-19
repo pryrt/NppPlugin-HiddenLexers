@@ -50,7 +50,7 @@ JSON file to pick which lexers to associate with which extensions, and to associ
 
 The example `HiddenLexers.json` config files have been moved to a separate [ExampleJsonFiles.md](./ExampleJsonFiles.md) , to avoid overwhelming this README.
 
-### Known Properties
+#### Known Properties
 
 These are the lexer-specific properties that Lexilla supports -- at least, the ones that I could easily extract from the source code and Lexilla documentation... this list will likely
 get out-of-date, and may not be complete, but it gives you a starting place... Always check the
