@@ -52,7 +52,7 @@ The example `HiddenLexers.json` config files have been moved to a separate [Exam
 
 ### Known Properties
 
-These are properties that I could easily extract from the source code... this list will likely
+These are the lexer-specific properties that Lexilla supports -- at least, the ones that I could easily extract from the source code and Lexilla documentation... this list will likely
 get out-of-date, and may not be complete, but it gives you a starting place... Always check the
 current [lexilla/Lexers/*.cxx](https://github.com/notepad-plus-plus/notepad-plus-plus/tree/master/lexilla/lexers)
 for the properties in your desired language.
