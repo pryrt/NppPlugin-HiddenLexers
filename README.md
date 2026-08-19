@@ -21,7 +21,7 @@ You can install the plugin using Notepad++'s **Plugins Admin** (TODO), or by unz
 
 ## Config files
 
-The configuration file for the plugin will be in `plugins\config\HiddenLexers\` as `HiddenLexer.json`.  If the directory or file is missing, the plugin will create it when Notepad+++ is launching.
+The configuration file for the plugin will be in `plugins\config\HiddenLexers\` as `HiddenLexers.json`.  If the directory or file is missing, the plugin will create it when Notepad+++ is launching.
 
 ### `HiddenLexers.json`
 
