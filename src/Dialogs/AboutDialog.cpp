@@ -1,5 +1,5 @@
 /*
-	Copyright (C) 2025  Peter C. Jones <pryrtcode@pryrt.com>
+	Copyright (C) 2025,2026  Peter C. Jones <pryrtcode@pryrt.com>
 
 	This file is part of the source code for the CollectionInterface plugin for Notepad++
 
@@ -23,6 +23,7 @@
 #include "Version.h"
 #include "Hyperlinks.h"
 #include "NppMetaClass.h"
+#include "NPP_DarkMode.h"
 
 #ifdef _WIN64
 #define BITNESS TEXT("(64 bit)")
